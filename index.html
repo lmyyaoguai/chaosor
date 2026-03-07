@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<title>CHAOSOR · 集团品牌手册</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   RESET & VARIABLES
+═══════════════════════════════════════════ */
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --void:#070707; --deep:#0C0C14; --coal:#131320; --dim:#1A1A2A;
+  --gold:#C8A84B; --gold2:#E8C870; --amber:#8B5E1A;
+  --silver:#8888AA; --light:#C8C8E0; --white:#F0F0F8;
+  --crimson:#C04040; --teal:#2A6B6B; --cyan:#4A9B9B;
+  --muted:#3A3A5C; --green:#3A6A38; --brown:#6A4A2A;
+}
+html,body{width:100%;height:100%;overflow:hidden;
+  background:var(--void);color:var(--white);
+  font-family:'Jost',sans-serif;font-weight:300}
+
+/* ═══════════════════════════════════════════
+   SLIDE ENGINE
+═══════════════════════════════════════════ */
+.slides{
+  width:100%;height:100vh;
+  overflow-y:scroll;overflow-x:hidden;
+  scroll-snap-type:y mandatory;
+  -webkit-overflow-scrolling:touch;
+}
+.slide{
+  width:100%;height:100vh;min-height:100vh;
+  scroll-snap-align:start;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:0 22px;
+}
+.slide-long{
+  height:auto;min-height:100vh;
+  scroll-snap-align:start;
+  justify-content:flex-start;
+  padding-top:58px;padding-bottom:44px;
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
+}
+
+/* ═══════════════════════════════════════════
+   FIXED CHROME
+═══════════════════════════════════════════ */
+#progress{
+  position:fixed;top:0;left:0;height:2px;width:0;
+  background:linear-gradient(90deg,var(--amber),var(--gold),var(--gold2));
+  transition:width .5s ease;z-index:9999;
+  box-shadow:0 0 10px rgba(200,168,75,.7);
+}
+.dots{
+  position:fixed;right:12px;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:7px;z-index:999;
+}
+.dot{width:4px;height:4px;border-radius:50%;background:rgba(200,168,75,.2);transition:all .4s;cursor:pointer}
+.dot.on{background:var(--gold);height:18px;border-radius:3px;box-shadow:0 0 10px rgba(200,168,75,.8)}
+.counter{
+  position:fixed;left:13px;bottom:18px;
+  font-family:'Cinzel',serif;font-size:8.5px;
+  color:rgba(200,168,75,.3);letter-spacing:.2em;z-index:999;
+}
+
+/* ═══════════════════════════════════════════
+   PARTICLES
+═══════════════════════════════════════════ */
+#pt{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.p{position:absolute;border-radius:50%;animation:pfloat linear infinite;opacity:0}
+@keyframes pfloat{
+  0%  {transform:translateY(108vh) translateX(0);opacity:0}
+  7%  {opacity:.9} 93%{opacity:.15}
+  100%{transform:translateY(-8vh) translateX(var(--d));opacity:0}
+}
+
+/* ═══════════════════════════════════════════
+   ANIMATION LIBRARY
+═══════════════════════════════════════════ */
+@keyframes fadeUp    {from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn    {from{opacity:0}to{opacity:1}}
+@keyframes scaleIn   {from{opacity:0;transform:scale(.72)}to{opacity:1;transform:scale(1)}}
+@keyframes shimmer   {0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes ringPulse {
+  0%,100%{opacity:.22;transform:translate(-50%,-50%) scale(1)}
+  50%    {opacity:.04;transform:translate(-50%,-50%) scale(1.07)}
+}
+@keyframes spinCW  {from{transform:rotate(0)}  to{transform:rotate(360deg)}}
+@keyframes spinCCW {from{transform:rotate(360deg)} to{transform:rotate(0)}}
+@keyframes breathe {0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.65;transform:scale(1.12)}}
+@keyframes pulse   {0%,100%{opacity:1}50%{opacity:.2}}
+@keyframes lineGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes borderGlow{
+  0%,100%{box-shadow:0 0 12px rgba(200,168,75,.15)}
+  50%    {box-shadow:0 0 30px rgba(200,168,75,.5),0 0 60px rgba(200,168,75,.1)}
+}
+@keyframes textGlow{
+  0%,100%{text-shadow:0 0 20px rgba(200,168,75,.2)}
+  50%    {text-shadow:0 0 40px rgba(200,168,75,.5),0 0 80px rgba(200,168,75,.15)}
+}
+@keyframes gridFloat{
+  0%,100%{opacity:.045}50%{opacity:.09}
+}
+
+/* activate on .on class */
+.slide.on .a1{animation:fadeUp .9s .05s both}
+.slide.on .a2{animation:fadeUp .9s .20s both}
+.slide.on .a3{animation:fadeUp .9s .35s both}
+.slide.on .a4{animation:fadeUp .9s .50s both}
+.slide.on .a5{animation:fadeUp .9s .65s both}
+.slide.on .a6{animation:fadeUp .9s .80s both}
+.slide.on .a7{animation:fadeUp .9s .95s both}
+.slide.on .asc{animation:scaleIn 1.1s .2s both}
+.slide.on .afi{animation:fadeIn 1.3s .1s both}
+.slide.on .agrow{animation:lineGrow .9s .6s both}
+
+/* ═══════════════════════════════════════════
+   SHARED UI ATOMS
+═══════════════════════════════════════════ */
+.tag{
+  font-size:8px;letter-spacing:.5em;text-transform:uppercase;
+  color:var(--gold);display:flex;align-items:center;gap:10px;
+  margin-bottom:14px;font-weight:400;
+}
+.tag::before,.tag::after{content:'';height:1px;width:16px;background:var(--gold);opacity:.35}
+.w100{width:100%}
+
+.dv{display:flex;align-items:center;gap:8px;width:100%;margin:13px 0}
+.dvl{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.dvl.r{background:linear-gradient(90deg,var(--gold),transparent)}
+.dvd{
+  width:5px;height:5px;background:var(--gold);
+  transform:rotate(45deg);flex-shrink:0;
+  box-shadow:0 0 8px rgba(200,168,75,.6);
+}
+.orb{position:absolute;border-radius:50%;filter:blur(75px);pointer-events:none}
+
+/* grid texture overlay — from v1 */
+.grid-tex{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(200,168,75,.5) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(200,168,75,.5) 1px,transparent 1px);
+  background-size:44px 44px;
+  opacity:.045;
+  animation:gridFloat 5s ease-in-out infinite;
+}
+
+.sec-title{
+  font-family:'Cinzel',serif;
+  font-size:clamp(20px,6vw,28px);
+  font-weight:600;color:var(--white);
+  letter-spacing:.05em;line-height:1.2;
+  margin-bottom:16px;width:100%;
+}
+.sec-title em{font-family:'Crimson Pro',serif;font-style:italic;color:var(--gold);font-size:1.08em}
+
+/* ═══════════════════════════════════════════
+   S1 — HERO
+═══════════════════════════════════════════ */
+#s1{
+  background:
+    radial-gradient(ellipse at 50% 100%,rgba(139,94,26,.18) 0%,transparent 55%),
+    radial-gradient(ellipse at 15% 15%,rgba(42,107,107,.1) 0%,transparent 45%),
+    var(--void);
+  text-align:center;
+}
+/* chaos rings */
+.rings{position:absolute;inset:0;pointer-events:none}
+.ring{
+  position:absolute;border-radius:50%;
+  border:1px solid rgba(200,168,75,.08);
+  top:50%;left:50%;
+  animation:ringPulse ease-in-out infinite;
+}
+.rg1{width:155px;height:155px;animation-duration:6s}
+.rg2{width:260px;height:260px;animation-duration:9s;animation-delay:1.5s}
+.rg3{width:370px;height:370px;animation-duration:12s;animation-delay:3s}
+.rg4{width:480px;height:480px;animation-duration:15s;animation-delay:4.5s}
+.rg5{width:600px;height:600px;animation-duration:18s;animation-delay:6s;border-color:rgba(200,168,75,.04)}
+
+.h-eye{
+  font-size:7.5px;letter-spacing:.55em;color:var(--gold);text-transform:uppercase;
+  display:flex;align-items:center;gap:12px;justify-content:center;
+}
+.h-eye::before,.h-eye::after{content:'';width:22px;height:1px;background:var(--gold);opacity:.45}
+
+/* logo with glow pseudo — from v1 */
+.h-logo-wrap{position:relative;z-index:1;margin-top:16px}
+.h-logo{
+  font-family:'Cinzel',serif;
+  font-size:clamp(54px,17vw,84px);
+  font-weight:900;letter-spacing:.14em;line-height:1;
+  background:linear-gradient(135deg,var(--gold2) 0%,var(--gold) 35%,var(--amber) 65%,var(--gold) 100%);
+  background-size:300% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmer 6s linear infinite,textGlow 4s ease-in-out infinite;
+  position:relative;z-index:1;
+}
+/* glowing blur double — from v1 */
+.h-logo::after{
+  content:'CHAOSOR';
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:blur(22px);opacity:.25;z-index:-1;
+}
+
+.h-tagline{
+  font-family:'Crimson Pro',serif;font-style:italic;
+  font-size:clamp(13px,4.2vw,18px);color:var(--light);letter-spacing:.04em;margin-top:5px;
+}
+.h-sub{font-size:7.5px;letter-spacing:.38em;color:var(--silver);text-transform:uppercase;margin-top:7px}
+
+.scroll-hint{
+  position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  opacity:0;animation:fadeIn 1s 2.8s forwards;
+}
+.sh-line{
+  width:1px;height:32px;
+  background:linear-gradient(180deg,var(--gold),transparent);
+  animation:pulse 2.2s ease-in-out infinite;
+}
+.sh-txt{font-size:6.5px;letter-spacing:.32em;color:var(--silver);text-transform:uppercase}
+
+/* ═══════════════════════════════════════════
+   S2 — CHAOS SYMBOL
+═══════════════════════════════════════════ */
+#s2{background:var(--deep);text-align:center}
+
+.sym-wrap{position:relative;width:200px;height:200px;margin:16px auto}
+/* three layers: outer CW dash, mid CCW dash, core CCW */
+.sym-r-out{position:absolute;inset:-24px;animation:spinCW 28s linear infinite;opacity:.2}
+.sym-r-mid{position:absolute;inset:-6px; animation:spinCCW 18s linear infinite;opacity:.15}
+.sym-core {position:absolute;inset:0;    animation:spinCCW 12s linear infinite}
+.sym-glow {
+  position:absolute;inset:18px;
+  background:radial-gradient(circle,rgba(200,168,75,.15),transparent 70%);
+  border-radius:50%;animation:breathe 3.5s ease-in-out infinite;
+}
+.sym-label{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:'Cinzel',serif;font-size:10px;color:var(--gold);
+  letter-spacing:.2em;text-align:center;line-height:1.7;
+  white-space:nowrap;z-index:2;
+  text-shadow:0 0 12px rgba(200,168,75,.5);
+}
+.sym-quote{
+  font-size:11.5px;color:var(--silver);text-align:center;
+  line-height:2;max-width:268px;margin-top:18px;
+}
+.sym-quote em{color:var(--gold);font-style:italic}
+
+/* ═══════════════════════════════════════════
+   S3 — NAME MEANING  (grid texture from v1)
+═══════════════════════════════════════════ */
+#s3{background:var(--void);justify-content:flex-start;padding-top:55px;padding-bottom:34px;overflow-y:auto}
+
+.mc{border-radius:14px;padding:20px 18px;position:relative;overflow:hidden;margin-bottom:10px;width:100%}
+.mc.cc{background:linear-gradient(135deg,#120404,#0A0A18);border:1px solid rgba(192,56,56,.38)}
+.mc.oc{background:linear-gradient(135deg,#120E00,#080812);border:1px solid rgba(200,168,75,.38)}
+
+/* grid texture inside name cards — from v1 */
+.mc .grid-tex{opacity:.06}
+
+.mc-ghost{
+  font-family:'Cinzel',serif;font-size:76px;font-weight:900;
+  position:absolute;right:-4px;top:-8px;line-height:1;opacity:.09;pointer-events:none;
+}
+.cc .mc-ghost{color:var(--crimson)}.oc .mc-ghost{color:var(--gold)}
+.mc-lang{font-size:7.5px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:8px}
+.cc .mc-lang{color:var(--crimson)}.oc .mc-lang{color:var(--gold)}
+.mc-word{font-family:'Cinzel',serif;font-size:24px;font-weight:900;color:var(--white);margin-bottom:7px;letter-spacing:.06em}
+.mc-body{font-size:11.5px;color:var(--silver);line-height:1.9;position:relative;z-index:1;max-width:235px}
+
+.mc-union{
+  background:linear-gradient(135deg,rgba(200,168,75,.09),rgba(192,56,56,.06));
+  border:1px solid rgba(200,168,75,.25);border-radius:14px;
+  padding:18px;text-align:center;width:100%;margin-top:10px;
+}
+.mcu-t{font-family:'Cinzel',serif;font-size:14px;color:var(--white);margin-bottom:7px}
+.mcu-t span{color:var(--gold)}
+.mcu-s{font-size:10.5px;color:var(--silver);line-height:1.85;font-style:italic}
+
+/* ═══════════════════════════════════════════
+   S4-6 — PHILOSOPHY
+═══════════════════════════════════════════ */
+.phil{background:var(--deep)}
+.phil-ghost{
+  font-family:'Cinzel',serif;font-size:47vw;font-weight:900;
+  color:rgba(200,168,75,.025);
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;line-height:1;
+}
+.pn{font-family:'Cinzel',serif;font-size:52px;font-weight:900;color:rgba(200,168,75,.1);line-height:1;margin-bottom:10px}
+.pe{font-family:'Cinzel',serif;font-size:clamp(18px,5.5vw,25px);color:var(--gold);letter-spacing:.04em;font-weight:700;margin-bottom:4px;line-height:1.28}
+.pz{font-size:13px;color:var(--light);letter-spacing:.14em;margin-bottom:18px}
+.pl{width:42px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin-bottom:18px;transform-origin:left}
+.pb{font-size:12.5px;color:var(--silver);line-height:2.05;max-width:295px;font-weight:300}
+.pq{margin-top:22px;padding:14px 16px;border-left:2px solid var(--gold);background:rgba(200,168,75,.05);border-radius:0 10px 10px 0}
+.pqt{font-family:'Crimson Pro',serif;font-style:italic;font-size:13px;color:var(--light);line-height:1.78}
+
+/* ═══════════════════════════════════════════
+   S7 — BRAND ARCHITECTURE
+═══════════════════════════════════════════ */
+#s7{background:var(--void)}
+
+/* main CHAOSOR card — v1 style with grid + glow border */
+.arch-head{
+  width:100%;
+  background:linear-gradient(135deg,rgba(200,168,75,.14),rgba(200,168,75,.04));
+  border:1.5px solid rgba(200,168,75,.55);
+  border-radius:16px;padding:22px;text-align:center;
+  margin-bottom:6px;
+  animation:borderGlow 3.5s ease-in-out infinite;
+  position:relative;overflow:hidden;
+}
+.arch-head .grid-tex{opacity:.065}
+.arch-head-name{
+  font-family:'Cinzel',serif;font-size:30px;font-weight:900;
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:.15em;margin-bottom:5px;position:relative;z-index:1;
+}
+.arch-head-role{font-size:8px;letter-spacing:.28em;color:var(--silver);text-transform:uppercase;position:relative;z-index:1}
+
+.arch-conn{display:flex;flex-direction:column;align-items:center;margin:4px 0}
+.arch-vl{width:1px;height:10px;background:var(--gold);opacity:.45}
+.arch-hl{width:74%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.38}
+
+/* brand cards — 3 sub brands, very prominent */
+.bcards{display:flex;flex-direction:column;gap:11px;width:100%}
+.bc{border-radius:15px;padding:19px 17px;position:relative;overflow:hidden}
+/* coloured left bar */
+.bc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px}
+/* hover-style bottom line — from v1 */
+.bc::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  transform:scaleX(0);transform-origin:left;transition:transform .5s;
+}
+.bc:active::after{transform:scaleX(1)}
+
+.bc.bs{background:linear-gradient(135deg,rgba(42,107,107,.16),rgba(42,107,107,.04));border:1px solid rgba(42,107,107,.45)}
+.bc.bo{background:linear-gradient(135deg,rgba(58,106,56,.16),rgba(58,106,56,.04)); border:1px solid rgba(58,106,56,.45)}
+.bc.bz{background:linear-gradient(135deg,rgba(106,74,42,.16),rgba(106,74,42,.04)); border:1px solid rgba(106,74,42,.45)}
+.bc.bs::before,.bc.bs::after{background:linear-gradient(90deg,var(--teal),var(--cyan))}
+.bc.bo::before,.bc.bo::after{background:linear-gradient(90deg,var(--green),#5A9A57)}
+.bc.bz::before,.bc.bz::after{background:linear-gradient(90deg,var(--brown),#9A7050)}
+
+.bc-bg{
+  position:absolute;right:-4px;bottom:-8px;
+  font-family:'Cinzel',serif;font-size:50px;font-weight:900;
+  opacity:.055;line-height:1;letter-spacing:.05em;pointer-events:none;
+}
+.bs .bc-bg{color:var(--teal)}.bo .bc-bg{color:var(--green)}.bz .bc-bg{color:var(--brown)}
+
+.bc-top{display:flex;align-items:center;gap:12px;margin-bottom:9px}
+.bc-icon{font-size:25px;flex-shrink:0}
+.bc-name{font-family:'Cinzel',serif;font-size:19px;font-weight:900;letter-spacing:.08em}
+.bs .bc-name{color:var(--teal)}.bo .bc-name{color:var(--green)}.bz .bc-name{color:var(--brown)}
+.bc-tag{font-size:7.5px;letter-spacing:.2em;text-transform:uppercase;display:block;margin-bottom:8px}
+.bs .bc-tag{color:var(--teal)}.bo .bc-tag{color:var(--green)}.bz .bc-tag{color:var(--brown)}
+.bc-desc{font-size:11px;color:var(--silver);line-height:1.88}
+
+.arch-chain{
+  text-align:center;margin-top:13px;padding:13px;
+  background:rgba(200,168,75,.05);border-radius:11px;
+  border:1px solid rgba(200,168,75,.1);width:100%;
+}
+.ac-main{font-size:10px;color:var(--gold);letter-spacing:.09em;margin-bottom:4px}
+.ac-sub{font-size:9px;color:var(--silver);font-style:italic}
+
+/* ═══════════════════════════════════════════
+   S8 — SUB BRANDS DEEP
+═══════════════════════════════════════════ */
+#s8{background:var(--deep)}
+
+.sb{width:100%;border-radius:16px;padding:21px 18px;margin-bottom:12px;position:relative;overflow:hidden}
+.sb.ss{background:linear-gradient(135deg,rgba(42,107,107,.17),rgba(42,107,107,.04));border:1.5px solid rgba(42,107,107,.52)}
+.sb.so{background:linear-gradient(135deg,rgba(58,106,56,.17),rgba(58,106,56,.04)); border:1.5px solid rgba(58,106,56,.52)}
+.sb.sz{background:linear-gradient(135deg,rgba(106,74,42,.17),rgba(106,74,42,.04)); border:1.5px solid rgba(106,74,42,.52)}
+
+/* grid texture in brand detail cards too */
+.sb .grid-tex{opacity:.05}
+
+.sb-bg{position:absolute;right:-8px;bottom:-12px;font-family:'Cinzel',serif;font-size:66px;font-weight:900;opacity:.042;line-height:1;pointer-events:none;letter-spacing:.05em}
+.ss .sb-bg{color:var(--teal)}.so .sb-bg{color:var(--green)}.sz .sb-bg{color:var(--brown)}
+
+.sb-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.sb-icon{font-size:30px}
+.sb-name{font-family:'Cinzel',serif;font-size:21px;font-weight:900;letter-spacing:.1em}
+.ss .sb-name{color:var(--teal)}.so .sb-name{color:var(--green)}.sz .sb-name{color:var(--brown)}
+.sb-role{font-size:7.5px;letter-spacing:.25em;text-transform:uppercase;margin-top:2px}
+.ss .sb-role{color:var(--teal)}.so .sb-role{color:var(--green)}.sz .sb-role{color:var(--brown)}
+.sb-hr{height:1px;background:rgba(255,255,255,.055);margin-bottom:12px}
+.sb-desc{font-size:11.5px;color:var(--silver);line-height:1.92}
+.sb-motto{font-size:11px;margin-top:10px;padding:10px 13px;background:rgba(0,0,0,.22);border-radius:8px;font-style:italic}
+.ss .sb-motto{color:var(--teal)}.so .sb-motto{color:var(--green)}.sz .sb-motto{color:var(--brown)}
+
+/* ═══════════════════════════════════════════
+   S-ORIGIN — 起源 (new from v1)
+═══════════════════════════════════════════ */
+#s-origin{background:linear-gradient(180deg,var(--void),var(--deep) 50%,var(--void))}
+
+.origin-quote-box{
+  margin-top:20px;padding:18px 20px;
+  border-left:2px solid var(--gold);
+  background:rgba(200,168,75,.05);
+  border-radius:0 12px 12px 0;
+}
+.oqb-text{font-family:'Crimson Pro',serif;font-style:italic;font-size:13px;color:var(--light);line-height:1.78;margin-bottom:8px}
+.oqb-attr{font-size:7.5px;letter-spacing:.22em;color:var(--gold);text-transform:uppercase}
+
+.origin-body{font-size:12px;color:var(--silver);line-height:2;max-width:300px;font-weight:300}
+
+/* ═══════════════════════════════════════════
+   S-VISION — 集团定位 (new from v1)
+═══════════════════════════════════════════ */
+#s-vision{background:var(--deep)}
+
+.vgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;margin-top:16px}
+.vc{border-radius:14px;padding:18px 15px;position:relative;overflow:hidden;transition:transform .3s}
+.vc:active{transform:scale(.97)}
+.vc.vd{background:var(--coal);border:1px solid var(--muted)}
+.vc.vg{
+  background:linear-gradient(135deg,rgba(200,168,75,.12),rgba(200,168,75,.04));
+  border:1px solid rgba(200,168,75,.22);
+}
+/* grid texture in vision cards too */
+.vc .grid-tex{opacity:.055}
+/* hover bottom line — from v1 */
+.vc::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--gold),var(--crimson));
+  transform:scaleX(0);transform-origin:left;transition:transform .5s;
+}
+.vc:active::after{transform:scaleX(1)}
+.vc-lbl{font-size:7.5px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.vc-txt{font-family:'Crimson Pro',serif;font-size:13px;line-height:1.78;color:var(--light)}
+
+/* ═══════════════════════════════════════════
+   S9 — COLOR SYSTEM
+═══════════════════════════════════════════ */
+#s9{background:var(--void);justify-content:flex-start;padding-top:55px;padding-bottom:36px}
+.pal{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;margin-top:13px}
+.pc{border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.045);transition:transform .3s}
+.pc:active{transform:scale(.96)}
+.pc-sw{height:56px}
+.pc-info{background:var(--coal);padding:9px 8px}
+.pc-name{font-size:7.5px;font-weight:500;color:var(--white);margin-bottom:2px}
+.pc-hex{font-size:6.5px;color:var(--silver);letter-spacing:.04em}
+.pc-role{font-size:6px;color:var(--gold);margin-top:3px;letter-spacing:.05em}
+.pal-note{font-size:9.5px;color:var(--silver);text-align:center;margin-top:14px;line-height:1.9;font-style:italic}
+
+/* ═══════════════════════════════════════════
+   S10 — MANIFESTO  (full v1 quality)
+═══════════════════════════════════════════ */
+#s10{
+  background:linear-gradient(140deg,#040300,#06000E,#040500);
+  text-align:center;
+}
+.man-ghost{
+  position:absolute;font-family:'Cinzel',serif;font-size:30vw;font-weight:900;
+  color:rgba(200,168,75,.022);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  white-space:nowrap;pointer-events:none;letter-spacing:.06em;
+}
+.man-main{
+  font-family:'Cinzel',serif;
+  font-size:clamp(23px,7.2vw,34px);
+  font-weight:600;color:var(--white);
+  line-height:1.55;position:relative;z-index:1;
+  margin-bottom:15px;letter-spacing:.04em;
+}
+.man-main span{color:var(--gold)}
+.man-en{
+  font-family:'Crimson Pro',serif;font-style:italic;
+  font-size:11.5px;color:var(--silver);line-height:1.92;
+  position:relative;z-index:1;max-width:248px;
+}
+.man-mark{
+  font-family:'Cinzel',serif;font-size:20px;font-weight:900;
+  letter-spacing:.2em;
+  background:linear-gradient(135deg,var(--gold2),var(--gold),var(--amber));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-top:26px;position:relative;z-index:1;
+  animation:shimmer 5s linear infinite,textGlow 4s ease-in-out infinite;
+  background-size:200% auto;
+}
+
+/* ═══════════════════════════════════════════
+   S11 — END CARD
+═══════════════════════════════════════════ */
+#s11{background:var(--void);text-align:center}
+.end-logo{
+  font-family:'Cinzel',serif;
+  font-size:clamp(46px,15vw,70px);
+  font-weight:900;letter-spacing:.14em;
+  background:linear-gradient(135deg,var(--gold2),var(--gold),var(--amber));
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmer 5s linear infinite;
+}
+.end-logo::after{
+  content:'CHAOSOR';
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:blur(20px);opacity:.2;z-index:-1;
+}
+.end-logo-wrap{position:relative;z-index:1}
+
+.end-pills{display:flex;gap:9px;justify-content:center;margin:18px 0;flex-wrap:wrap}
+.ep{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.18em;border-radius:20px;padding:7px 15px;text-transform:uppercase;font-weight:700}
+.ep.es{color:var(--teal); border:1.5px solid rgba(42,107,107,.55);background:rgba(42,107,107,.08)}
+.ep.eo{color:var(--green);border:1.5px solid rgba(58,106,56,.55); background:rgba(58,106,56,.08)}
+.ep.ez{color:var(--brown);border:1.5px solid rgba(106,74,42,.55); background:rgba(106,74,42,.08)}
+.end-tag{
+  font-family:'Crimson Pro',serif;font-style:italic;
+  font-size:15px;color:var(--light);line-height:1.78;max-width:248px;
+}
+.end-tag strong{color:var(--gold);font-style:normal;font-family:'Cinzel',serif;font-size:12px;letter-spacing:.1em}
+.end-url{font-size:8px;letter-spacing:.3em;color:rgba(200,168,75,.3);margin-top:22px;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<div id="pt"></div>
+<div id="progress"></div>
+<div class="dots" id="dots"></div>
+<div class="counter" id="ctr">01 / 14</div>
+
+<div class="slides" id="slides">
+
+<!-- ════════ S1: HERO ════════ -->
+<div class="slide" id="s1">
+  <div class="rings">
+    <div class="ring rg1"></div><div class="ring rg2"></div>
+    <div class="ring rg3"></div><div class="ring rg4"></div><div class="ring rg5"></div>
+  </div>
+  <div class="orb" style="width:250px;height:250px;background:radial-gradient(circle,rgba(139,94,26,.26),transparent 70%);top:30%;left:8%"></div>
+  <div class="orb" style="width:180px;height:180px;background:radial-gradient(circle,rgba(42,107,107,.14),transparent 70%);bottom:16%;right:4%"></div>
+
+  <div class="h-eye a1">集团品牌手册 · GROUP BRAND IDENTITY</div>
+
+  <div class="h-logo-wrap a2">
+    <div class="h-logo">CHAOSOR</div>
+  </div>
+
+  <div class="dv a3"><div class="dvl"></div><div class="dvd"></div><div class="dvl r"></div></div>
+  <div class="h-tagline a4">混沌中的黄金 · 从无序中创造价值</div>
+  <div class="h-sub a5">CHAOS · ORIGIN · GOLD · POWER</div>
+
+  <div class="scroll-hint">
+    <div class="sh-line"></div>
+    <div class="sh-txt">向上滑动</div>
+  </div>
+</div>
+
+<!-- ════════ S2: CHAOS SYMBOL ════════ -->
+<div class="slide" id="s2">
+  <div class="orb" style="width:320px;height:320px;background:radial-gradient(circle,rgba(139,94,26,.1),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+  <div class="tag a1">品牌符号 · THE SYMBOL OF CHAOS</div>
+  <div class="sec-title a2" style="text-align:center">THE<br><em>CHAOS ORIGIN</em></div>
+
+  <div class="sym-wrap asc">
+    <svg class="sym-r-out" style="position:absolute;inset:-24px;width:calc(100% + 48px);height:calc(100% + 48px)" viewBox="0 0 248 248" fill="none">
+      <circle cx="124" cy="124" r="119" stroke="rgba(200,168,75,.14)" stroke-width="1" stroke-dasharray="7 12"/>
+    </svg>
+    <svg class="sym-r-mid" style="position:absolute;inset:-6px;width:calc(100% + 12px);height:calc(100% + 12px)" viewBox="0 0 212 212" fill="none">
+      <circle cx="106" cy="106" r="102" stroke="rgba(200,168,75,.1)" stroke-width=".8" stroke-dasharray="3 9"/>
+    </svg>
+    <svg class="sym-core" viewBox="0 0 200 200" fill="none" style="position:absolute;inset:0;width:100%;height:100%">
+      <circle cx="100" cy="100" r="88" stroke="rgba(200,168,75,.07)" stroke-width=".6"/>
+      <circle cx="100" cy="100" r="62" stroke="rgba(200,168,75,.06)" stroke-width=".5" stroke-dasharray="3 8"/>
+      <circle cx="100" cy="100" r="36" stroke="rgba(200,168,75,.05)" stroke-width=".5"/>
+      <g stroke="#C8A84B" stroke-width="1.3" stroke-linecap="round" opacity=".88">
+        <line x1="100" y1="100" x2="100" y2="11"/><line x1="100" y1="11" x2="93" y2="27"/><line x1="100" y1="11" x2="107" y2="27"/>
+        <line x1="100" y1="100" x2="100" y2="189"/><line x1="100" y1="189" x2="93" y2="173"/><line x1="100" y1="189" x2="107" y2="173"/>
+        <line x1="100" y1="100" x2="11"  y2="100"/><line x1="11"  y1="100" x2="27"  y2="93"/><line x1="11"  y1="100" x2="27"  y2="107"/>
+        <line x1="100" y1="100" x2="189" y2="100"/><line x1="189" y1="100" x2="173" y2="93"/><line x1="189" y1="100" x2="173" y2="107"/>
+        <line x1="100" y1="100" x2="163" y2="37"/><line x1="163" y1="37" x2="151" y2="44"/><line x1="163" y1="37" x2="156" y2="53"/>
+        <line x1="100" y1="100" x2="37"  y2="163"/><line x1="37"  y1="163" x2="49"  y2="156"/><line x1="37"  y1="163" x2="44"  y2="147"/>
+        <line x1="100" y1="100" x2="37"  y2="37"/><line x1="37"  y1="37"  x2="49"  y2="44"/><line x1="37"  y1="37"  x2="44"  y2="53"/>
+        <line x1="100" y1="100" x2="163" y2="163"/><line x1="163" y1="163" x2="151" y2="156"/><line x1="163" y1="163" x2="156" y2="147"/>
+      </g>
+      <circle cx="100" cy="100" r="13" fill="rgba(200,168,75,.07)"/>
+      <circle cx="100" cy="100" r="7"  fill="rgba(200,168,75,.65)"/>
+      <circle cx="100" cy="100" r="3"  fill="#E8C870"/>
+    </svg>
+    <div class="sym-glow"></div>
+    <div class="sym-label">混沌<br>之源</div>
+  </div>
+
+  <div class="sym-quote a3">
+    古希腊神话中，混沌是宇宙最初的状态<br>
+    万物从这片深邃的虚空中诞生<br>
+    <em>"In the beginning, there was Chaos"</em>
+  </div>
+</div>
+
+<!-- ════════ S3: NAME MEANING ════════ -->
+<div class="slide slide-long" id="s3">
+  <div class="tag a1 w100">品牌名解析 · NAME MEANING</div>
+  <div class="sec-title a2">TWO ROOTS,<br><em>ONE UNIVERSE</em></div>
+
+  <div class="mc cc a3">
+    <div class="grid-tex"></div>
+    <div class="mc-ghost">C</div>
+    <div class="mc-lang">古希腊语 · Χάος · Greek Origin</div>
+    <div class="mc-word">CHAOS · 混沌</div>
+    <div class="mc-body">宇宙万物的起源状态，无形无边的虚空。一切可能性的母体，代表无限的创造力、颠覆与重生的力量。道家称之为「混沌初开，乾坤始奠」。</div>
+  </div>
+
+  <div class="mc oc a4">
+    <div class="grid-tex"></div>
+    <div class="mc-ghost">O</div>
+    <div class="mc-lang">纹章学 · Heraldry · OR = Gold</div>
+    <div class="mc-word">OR · 黄金</div>
+    <div class="mc-body">欧洲纹章学中代表黄金，是财富、智慧、王权与卓越的最高象征。只有最高贵的家族徽章才使用OR。从混沌中提炼出的最高价值。</div>
+  </div>
+
+  <div class="mc-union a5">
+    <div class="mcu-t">CHAOS + OR = <span>混沌中的黄金</span></div>
+    <div class="mcu-s">在最深的混沌与不确定中<br>找到并创造真正的价值</div>
+  </div>
+</div>
+
+<!-- ════════ S4: PHILOSOPHY 01 ════════ -->
+<div class="slide phil" id="s4">
+  <div class="phil-ghost">01</div>
+  <div class="tag a1">集团哲学 · 01 / 03</div>
+  <div class="pn a2">01</div>
+  <div class="pe a3">CHAOS IS<br>OPPORTUNITY</div>
+  <div class="pz a3">混沌即机遇</div>
+  <div class="pl agrow"></div>
+  <div class="pb a4">大多数人逃避混沌与不确定，CHAOSOR 却在混沌中寻找机遇。我们相信，最大的机会藏在最深的不确定之中。敢于进入混沌，才能发现别人看不见的价值。</div>
+  <div class="pq a5"><div class="pqt">当市场恐惧时，我们进入；当秩序已定时，我们已经离开。</div></div>
+</div>
+
+<!-- ════════ S5: PHILOSOPHY 02 ════════ -->
+<div class="slide phil" id="s5">
+  <div class="phil-ghost">02</div>
+  <div class="tag a1">集团哲学 · 02 / 03</div>
+  <div class="pn a2">02</div>
+  <div class="pe a3">ORDER FROM<br>WITHIN</div>
+  <div class="pz a3">秩序源于内在</div>
+  <div class="pl agrow"></div>
+  <div class="pb a4">外部世界是混沌的，但 CHAOSOR 内部是清晰的。我们用极致的内部秩序去应对外部的混沌，以最深刻的战略洞见驾驭最复杂的市场环境。</div>
+  <div class="pq a5"><div class="pqt">混沌是我们的战场，不是我们的状态。</div></div>
+</div>
+
+<!-- ════════ S6: PHILOSOPHY 03 ════════ -->
+<div class="slide phil" id="s6">
+  <div class="phil-ghost">03</div>
+  <div class="tag a1">集团哲学 · 03 / 03</div>
+  <div class="pn a2">03</div>
+  <div class="pe a3">LONG-TERM<br>THINKING</div>
+  <div class="pz a3">长期主义者</div>
+  <div class="pl agrow"></div>
+  <div class="pb a4">混沌是宇宙的常态，秩序只是短暂的平衡。CHAOSOR 以百年为单位思考，不被短期波动所扰，在时间的维度上积累不可撼动的力量。</div>
+  <div class="pq a5"><div class="pqt">我们种下的种子，会在混沌中生长为参天大树。</div></div>
+</div>
+
+<!-- ════════ S7: BRAND ARCHITECTURE ════════ -->
+<div class="slide slide-long" id="s7">
+  <div class="tag a1 w100">品牌架构 · GROUP ECOSYSTEM</div>
+
+  <div class="arch-head a2">
+    <div class="grid-tex"></div>
+    <div class="arch-head-name">CHAOSOR</div>
+    <div class="arch-head-role">集团控股主体 · Holding Group</div>
+  </div>
+
+  <div class="arch-conn a3"><div class="arch-vl"></div><div class="arch-hl"></div></div>
+
+  <div class="bcards">
+    <div class="bc bs a4">
+      <div class="bc-bg">SOPHSTAR</div>
+      <div class="bc-top">
+        <div class="bc-icon">⭐</div>
+        <div>
+          <div class="bc-name">SOPHSTAR</div>
+          <span class="bc-tag">智慧之星 · 战略投资平台</span>
+        </div>
+      </div>
+      <div class="bc-desc">SOPH（希腊·智慧）+ STAR（星），集团战略投资与资本运作核心，用智慧驾驭混沌中的方向与机遇。</div>
+    </div>
+
+    <div class="bc bo a5">
+      <div class="bc-bg">ORGVIE</div>
+      <div class="bc-top">
+        <div class="bc-icon">☕</div>
+        <div>
+          <div class="bc-name">ORGVIE</div>
+          <span class="bc-tag">有机生命 · 灵芝菌菇咖啡</span>
+        </div>
+      </div>
+      <div class="bc-desc">ORG（有机）× VIE（法语·生命），有机灵芝菌菇咖啡品牌，大地孕育的生命精华，法式高端生活美学。</div>
+    </div>
+
+    <div class="bc bz a6">
+      <div class="bc-bg">ZELOPIA</div>
+      <div class="bc-top">
+        <div class="bc-icon">🌿</div>
+        <div>
+          <div class="bc-name">ZELOPIA</div>
+          <span class="bc-tag">自然乌托邦 · 高端生活方式</span>
+        </div>
+      </div>
+      <div class="bc-desc">ZEAL（热情）× OPIA（境地），混沌中诞生的自然乌托邦，高端有机生活方式的最高想象。</div>
+    </div>
+  </div>
+
+  <div class="arch-chain a7">
+    <div class="ac-main">混沌 → 智慧 → 生命 → 理想</div>
+    <div class="ac-sub">宇宙从混沌到文明的完整进化链条</div>
+  </div>
+</div>
+
+<!-- ════════ S8: SUB BRANDS DEEP ════════ -->
+<div class="slide slide-long" id="s8">
+  <div class="tag a1 w100">子品牌详解 · SUB BRANDS</div>
+  <div class="sec-title a2">THREE BRANDS,<br><em>ONE VISION</em></div>
+
+  <div class="sb ss a3">
+    <div class="grid-tex"></div>
+    <div class="sb-bg">SOPHSTAR</div>
+    <div class="sb-head">
+      <div class="sb-icon">⭐</div>
+      <div>
+        <div class="sb-name">SOPHSTAR</div>
+        <div class="sb-role">智慧之星 · Investment & Strategy</div>
+      </div>
+    </div>
+    <div class="sb-hr"></div>
+    <div class="sb-desc">SOPH（希腊语·智慧，Philosophy的词根）+ STAR（星）。用最高智慧驾驭星辰，是 CHAOSOR 集团的战略大脑与资本引擎，在混沌市场中找到黄金机遇。</div>
+    <div class="sb-motto">智慧不是对抗混沌，而是在混沌中找到星光。</div>
+  </div>
+
+  <div class="sb so a4">
+    <div class="grid-tex"></div>
+    <div class="sb-bg">ORGVIE</div>
+    <div class="sb-head">
+      <div class="sb-icon">☕</div>
+      <div>
+        <div class="sb-name">ORGVIE</div>
+        <div class="sb-role">有机生命 · Organic Food Brand</div>
+      </div>
+    </div>
+    <div class="sb-hr"></div>
+    <div class="sb-desc">ORG（Organic·有机）+ VIE（法语·生命/生活）。有机灵芝菌菇咖啡，让大地最纯粹的馈赠成为每天的仪式感。高端有机食品，法式生活美学。</div>
+    <div class="sb-motto">大地的混沌孕育了最纯粹的有机生命。</div>
+  </div>
+
+  <div class="sb sz a5">
+    <div class="grid-tex"></div>
+    <div class="sb-bg">ZELOPIA</div>
+    <div class="sb-head">
+      <div class="sb-icon">🌿</div>
+      <div>
+        <div class="sb-name">ZELOPIA</div>
+        <div class="sb-role">自然乌托邦 · Lifestyle Brand</div>
+      </div>
+    </div>
+    <div class="sb-hr"></div>
+    <div class="sb-desc">ZEAL（热情）+ OPIA（境地），充满热情的美好境地，高端有机生活方式的最高想象。不被任何品类绑定，像 Apple 一样自由定义自己。</div>
+    <div class="sb-motto">混沌中诞生的理想，就是 ZELOPIA。</div>
+  </div>
+</div>
+
+<!-- ════════ S-ORIGIN: 集团起源 (from v1) ════════ -->
+<div class="slide slide-long" id="s-origin">
+  <div class="orb" style="width:260px;height:260px;background:radial-gradient(circle,rgba(139,94,26,.12),transparent 70%);top:40%;right:-40px"></div>
+
+  <div class="tag a1 w100">集团起源 · ORIGIN</div>
+  <div class="sec-title a2">从<em>混沌</em>中<br>诞生的力量</div>
+
+  <div class="origin-body a3">古希腊哲学家赫西俄德说，宇宙最初只有混沌（Chaos）——无形无边、深邃无底的虚空。从这片混沌中，诞生了大地、天空、海洋，诞生了一切秩序与文明。</div>
+
+  <div class="origin-body a4" style="margin-top:12px">CHAOSOR 的名字正源于此。我们相信，真正的创造力不来自现有的秩序，而来自敢于进入混沌、敢于在不确定中寻找机遇的勇气。</div>
+
+  <div class="origin-quote-box a5">
+    <div class="oqb-text">"In the beginning, there was Chaos. From Chaos, everything was born."</div>
+    <div class="oqb-attr">赫西俄德 · 《神谱》· 约公元前700年</div>
+  </div>
+
+  <!-- mini chaos symbol -->
+  <div style="width:120px;height:120px;margin:20px auto 0;position:relative;" class="a6">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;animation:spinCCW 20s linear infinite" viewBox="0 0 120 120" fill="none">
+      <circle cx="60" cy="60" r="56" stroke="rgba(200,168,75,.12)" stroke-width=".8" stroke-dasharray="4 8"/>
+    </svg>
+    <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 120 120" fill="none">
+      <g stroke="#C8A84B" stroke-width="1" stroke-linecap="round" opacity=".7">
+        <line x1="60" y1="60" x2="60" y2="8"/><line x1="60" y1="8" x2="56" y2="18"/><line x1="60" y1="8" x2="64" y2="18"/>
+        <line x1="60" y1="60" x2="60" y2="112"/><line x1="60" y1="112" x2="56" y2="102"/><line x1="60" y1="112" x2="64" y2="102"/>
+        <line x1="60" y1="60" x2="8"  y2="60"/><line x1="8"  y1="60" x2="18" y2="56"/><line x1="8"  y1="60" x2="18" y2="64"/>
+        <line x1="60" y1="60" x2="112" y2="60"/><line x1="112" y1="60" x2="102" y2="56"/><line x1="112" y1="60" x2="102" y2="64"/>
+        <line x1="60" y1="60" x2="98" y2="22"/><line x1="98" y1="22" x2="91" y2="27"/><line x1="98" y1="22" x2="93" y2="32"/>
+        <line x1="60" y1="60" x2="22" y2="98"/><line x1="22" y1="98" x2="29" y2="93"/><line x1="22" y1="98" x2="27" y2="87"/>
+        <line x1="60" y1="60" x2="22" y2="22"/><line x1="22" y1="22" x2="29" y2="27"/><line x1="22" y1="22" x2="27" y2="37"/>
+        <line x1="60" y1="60" x2="98" y2="98"/><line x1="98" y1="98" x2="91" y2="93"/><line x1="98" y1="98" x2="93" y2="87"/>
+      </g>
+      <circle cx="60" cy="60" r="5" fill="rgba(200,168,75,.7)"/>
+      <circle cx="60" cy="60" r="2.5" fill="#E8C870"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ════════ S-VISION: 集团定位 (from v1) ════════ -->
+<div class="slide slide-long" id="s-vision">
+  <div class="orb" style="width:200px;height:200px;background:radial-gradient(circle,rgba(42,107,107,.1),transparent 70%);top:20%;right:-20px"></div>
+
+  <div class="tag a1 w100">集团定位 · STRATEGIC VISION</div>
+  <div class="sec-title a2">清晰的<em>战略方向</em></div>
+
+  <div class="vgrid">
+    <div class="vc vd a3">
+      <div class="grid-tex"></div>
+      <div class="vc-lbl">集团使命</div>
+      <div class="vc-txt">在混沌与不确定中发现价值，通过战略投资与品牌建设，在全球市场创造可持续的卓越回报。</div>
+    </div>
+    <div class="vc vg a4">
+      <div class="grid-tex"></div>
+      <div class="vc-lbl">集团愿景</div>
+      <div class="vc-txt">成为亚洲最具哲学深度的多元化控股集团，让CHAOSOR成为从混沌中创造价值的代名词。</div>
+    </div>
+    <div class="vc vg a5">
+      <div class="grid-tex"></div>
+      <div class="vc-lbl">核心价值观</div>
+      <div class="vc-txt">拥抱混沌、洞察本质、长期主义、创造价值。在别人恐惧时进入，在别人贪婪时审视。</div>
+    </div>
+    <div class="vc vd a6">
+      <div class="grid-tex"></div>
+      <div class="vc-lbl">品牌承诺</div>
+      <div class="vc-txt">CHAOSOR 旗下每一个品牌，都是从混沌中提炼出来的价值——纯粹、经得起时间考验。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ S9: COLORS ════════ -->
+<div class="slide" id="s9">
+  <div class="tag a1 w100">品牌色彩 · COLOR SYSTEM</div>
+  <div class="sec-title a2">THE PALETTE OF<br><em>CHAOS & GOLD</em></div>
+  <div class="pal a3">
+    <div class="pc"><div class="pc-sw" style="background:#070707;border-bottom:1px solid #222"></div><div class="pc-info"><div class="pc-name">Void Black</div><div class="pc-hex">#070707</div><div class="pc-role">主背景·混沌之源</div></div></div>
+    <div class="pc"><div class="pc-sw" style="background:#C8A84B"></div><div class="pc-info"><div class="pc-name">Heraldic Gold</div><div class="pc-hex">#C8A84B</div><div class="pc-role">主色·纹章黄金</div></div></div>
+    <div class="pc"><div class="pc-sw" style="background:#E8C870"></div><div class="pc-info"><div class="pc-name">Solar Gold</div><div class="pc-hex">#E8C870</div><div class="pc-role">高光·太阳之金</div></div></div>
+    <div class="pc"><div class="pc-sw" style="background:#C04040"></div><div class="pc-info"><div class="pc-name">Chaos Crimson</div><div class="pc-hex">#C04040</div><div class="pc-role">点缀·混沌之火</div></div></div>
+    <div class="pc"><div class="pc-sw" style="background:#2A6B6B"></div><div class="pc-info"><div class="pc-name">Sophstar Teal</div><div class="pc-hex">#2A6B6B</div><div class="pc-role">SOPHSTAR专色</div></div></div>
+    <div class="pc"><div class="pc-sw" style="background:#3A6A38"></div><div class="pc-info"><div class="pc-name">Orgvie Green</div><div class="pc-hex">#3A6A38</div><div class="pc-role">ORGVIE专色</div></div></div>
+  </div>
+  <div class="pal-note a4">黑暗中的黄金 · 混沌中的秩序<br>每一种颜色都来自宇宙最深处</div>
+</div>
+
+<!-- ════════ S10: MANIFESTO ════════ -->
+<div class="slide" id="s10">
+  <div class="man-ghost">CHAOS</div>
+  <div class="orb" style="width:310px;height:310px;background:radial-gradient(circle,rgba(139,94,26,.16),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+
+  <div class="tag a1" style="justify-content:center">集团宣言 · MANIFESTO</div>
+  <div class="man-main a2">
+    混沌不是终点<br>
+    混沌是<span>一切伟大</span><br>
+    <span>的起点</span>
+  </div>
+  <div class="dv a3"><div class="dvl"></div><div class="dvd"></div><div class="dvl r"></div></div>
+  <div class="man-en a4">
+    Chaos is not the end.<br>
+    Chaos is where all greatness begins.<br>
+    This is CHAOSOR.
+  </div>
+  <div class="man-mark a5">CHAOSOR</div>
+</div>
+
+<!-- ════════ S11: END CARD ════════ -->
+<div class="slide" id="s11">
+  <div class="orb" style="width:330px;height:330px;background:radial-gradient(circle,rgba(139,94,26,.13),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+
+  <div class="end-logo-wrap a1">
+    <div class="end-logo">CHAOSOR</div>
+  </div>
+
+  <div class="dv a2"><div class="dvl"></div><div class="dvd"></div><div class="dvl r"></div></div>
+
+  <div class="end-pills a3">
+    <div class="ep es">SOPHSTAR</div>
+    <div class="ep eo">ORGVIE</div>
+    <div class="ep ez">ZELOPIA</div>
+  </div>
+
+  <div class="dv a4"><div class="dvl"></div><div class="dvd"></div><div class="dvl r"></div></div>
+
+  <div class="end-tag a4">
+    从混沌中来，向价值而去<br>
+    <strong>这就是 CHAOSOR</strong>
+  </div>
+  <div class="end-url a5">chaosor.com</div>
+</div>
+
+</div><!-- /slides -->
+
+<script>
+/* ── PARTICLES ── */
+(function(){
+  var c=document.getElementById('pt');
+  for(var i=0;i<58;i++){
+    var p=document.createElement('div');p.className='p';
+    var s=Math.random()*2.4+0.4;
+    var gold=Math.random()>.46;
+    p.style.cssText=
+      'left:'+Math.random()*100+'%;'+
+      'width:'+s+'px;height:'+s+'px;'+
+      'animation-duration:'+(Math.random()*22+13)+'s;'+
+      'animation-delay:'+(Math.random()*22)+'s;'+
+      '--d:'+(Math.random()-.5)*210+'px;'+
+      'background:'+(gold?'#C8A84B':'rgba(192,200,230,.38)')+';'+
+      (gold?'box-shadow:0 0 5px rgba(200,168,75,.45);':'');
+    c.appendChild(p);
+  }
+})();
+
+/* ── SLIDE ENGINE ── */
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var dotsEl=document.getElementById('dots');
+  var ctrEl =document.getElementById('ctr');
+  var pbEl  =document.getElementById('progress');
+  var total =slides.length;
+
+  /* build dots */
+  slides.forEach(function(_,i){
+    var d=document.createElement('div');
+    d.className='dot'+(i===0?' on':'');
+    d.addEventListener('click',function(){
+      slides[i].scrollIntoView({behavior:'smooth'});
+    });
+    dotsEl.appendChild(d);
+  });
+
+  function activate(idx){
+    /* dots */
+    [].forEach.call(document.querySelectorAll('.dot'),function(d,i){
+      d.classList.toggle('on',i===idx);
+    });
+    /* counter */
+    ctrEl.textContent=('0'+(idx+1)).slice(-2)+' / '+('0'+total).slice(-2);
+    /* progress bar */
+    pbEl.style.width=((idx+1)/total*100)+'%';
+    /* add .on to slide to fire animations */
+    slides[idx].classList.add('on');
+  }
+
+  /* IntersectionObserver — fires when slide is >52% visible */
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        activate(slides.indexOf(e.target));
+      }
+    });
+  },{threshold:0.52});
+
+  slides.forEach(function(s){obs.observe(s);});
+  activate(0);
+})();
+</script>
+</body>
+</html>
