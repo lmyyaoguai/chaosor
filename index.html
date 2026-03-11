@@ -212,6 +212,32 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:32px 48
   .process,.stats{grid-template-columns:1fr 1fr}
   footer{flex-direction:column;text-align:center;padding:24px 22px}
 }
+
+/* CONTACT FORM */
+.contact-form{width:100%;max-width:620px;margin:0 auto 44px;display:flex;flex-direction:column;gap:16px}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cf-field{display:flex;flex-direction:column;gap:7px}
+.cf-field label{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-dim)}
+.cf-field input,.cf-field select,.cf-field textarea{
+  background:var(--card);border:1px solid var(--border);
+  color:var(--text);padding:12px 16px;
+  font-family:'Josefin Sans',sans-serif;font-size:12px;font-weight:300;
+  outline:none;transition:border-color .25s;
+  -webkit-appearance:none;appearance:none
+}
+.cf-field input:focus,.cf-field select:focus,.cf-field textarea:focus{border-color:var(--gold-dim)}
+.cf-field input::placeholder,.cf-field textarea::placeholder{color:var(--text-faint)}
+.cf-field select{cursor:pointer;color:var(--text-dim)}
+.cf-field textarea{resize:vertical;min-height:100px}
+.cf-submit{
+  font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:.25em;
+  text-transform:uppercase;color:var(--void);background:var(--gold);
+  border:none;padding:14px 32px;cursor:pointer;
+  transition:background .25s;align-self:flex-start
+}
+.cf-submit:hover{background:var(--gold2)}
+@media(max-width:600px){.cf-row{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -534,13 +560,43 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:32px 48
     <div class="sec-label" style="justify-content:center">联系我们 · Contact</div>
     <p class="contact-en">"The gold is found within the chaos.<br>Let us find yours."</p>
     <p class="contact-zh">混沌之中，价值所在 — 让我们一起探寻属于你的黄金</p>
-    <div class="contact-btns">
-      <a href="/cdn-cgi/l/email-protection#452d2029292a05262d242a362a376b262a28" class="btn-solid">发送邮件 · Email Us</a>
-      <a href="#services" class="btn-ghost">了解服务 · Services</a>
-    </div>
+
+    <form class="contact-form" action="https://formspree.io/f/xzzbnqow" method="POST">
+      <div class="cf-row">
+        <div class="cf-field">
+          <label>姓名 · Name</label>
+          <input type="text" name="name" placeholder="您的姓名 / Your name" required>
+        </div>
+        <div class="cf-field">
+          <label>邮箱 · Email</label>
+          <input type="email" name="email" placeholder="您的邮箱 / Your email" required>
+        </div>
+      </div>
+      <div class="cf-field">
+        <label>服务需求 · Service</label>
+        <select name="service">
+          <option value="">请选择 / Please select</option>
+          <option value="immigration">移民服务 · Immigration</option>
+          <option value="study">海外留学 · Study Abroad</option>
+          <option value="work">出国务工 · Overseas Work</option>
+          <option value="investment">投资咨询 · Investment</option>
+          <option value="consulting">战略咨询 · Strategic Consulting</option>
+          <option value="company">公司注册 · Company Setup</option>
+          <option value="trade">国际贸易 · International Trade</option>
+          <option value="other">其他 · Other</option>
+        </select>
+      </div>
+      <div class="cf-field">
+        <label>留言 · Message</label>
+        <textarea name="message" rows="4" placeholder="请简述您的需求 / Please describe your needs" required></textarea>
+      </div>
+      <input type="hidden" name="_replyto" value="13521710071@163.com">
+      <button type="submit" class="cf-submit">发送消息 · Send Message</button>
+    </form>
+
     <div class="contact-info">
       <div class="ci"><div class="ci-dot"></div>新加坡注册公司 · Singapore Registered · Pte. Ltd.</div>
-      <div class="ci"><div class="ci-dot"></div><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d3bbb6bfbfbc93b0bbb2bca0bca1fdb0bcbe">[email&#160;protected]</a></div>
+      <div class="ci"><div class="ci-dot"></div><strong style="color:var(--gold);letter-spacing:.05em">hello@chaosor.com</strong></div>
       <div class="ci"><div class="ci-dot"></div>chaosor.com · 全球服务 · Global Services</div>
     </div>
   </div>
