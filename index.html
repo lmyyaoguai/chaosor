@@ -2,974 +2,567 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="format-detection" content="telephone=no">
-<title>CHAOSOR · 集团品牌手册</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CHAOSOR Pte. Ltd. — Where Chaos Becomes Gold</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════════
-   RESET & VARIABLES
-═══════════════════════════════════════════ */
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
-  --void:#070707; --deep:#0C0C14; --coal:#131320; --dim:#1A1A2A;
-  --gold:#C8A84B; --gold2:#E8C870; --amber:#8B5E1A;
-  --silver:#8888AA; --light:#C8C8E0; --white:#F0F0F8;
-  --crimson:#C04040; --teal:#2A6B6B; --cyan:#4A9B9B;
-  --muted:#3A3A5C; --green:#3A6A38; --brown:#6A4A2A;
+  --gold:#C8A84B;--gold2:#E8C870;--amber:#8B5E1A;
+  --gold-dim:rgba(200,168,75,.3);--gold-faint:rgba(200,168,75,.07);
+  --void:#070707;--deep:#0d0b05;--card:#111009;--card2:#181407;
+  --text:#EDE8D8;--text-dim:rgba(237,232,216,.6);--text-faint:rgba(237,232,216,.28);
+  --border:rgba(200,168,75,.1);--border-h:rgba(200,168,75,.32);
+  --teal:#2A6B6B;--green:#3A6A38;
 }
-html,body{width:100%;height:100%;overflow:hidden;
-  background:var(--void);color:var(--white);
-  font-family:'Jost',sans-serif;font-weight:300}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--text);font-family:'Josefin Sans',sans-serif;overflow-x:hidden}
+::-webkit-scrollbar{width:2px}
+::-webkit-scrollbar-track{background:var(--void)}
+::-webkit-scrollbar-thumb{background:var(--gold-dim)}
 
-/* ═══════════════════════════════════════════
-   SLIDE ENGINE
-═══════════════════════════════════════════ */
-.slides{
-  width:100%;height:100vh;
-  overflow-y:scroll;overflow-x:hidden;
-  scroll-snap-type:y mandatory;
-  -webkit-overflow-scrolling:touch;
-}
-.slide{
-  width:100%;height:100vh;min-height:100vh;
-  scroll-snap-align:start;
-  position:relative;overflow:hidden;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  padding:0 22px;
-}
-.slide-long{
-  height:auto;min-height:100vh;
-  scroll-snap-align:start;
-  justify-content:flex-start;
-  padding-top:58px;padding-bottom:44px;
-  overflow-y:auto;-webkit-overflow-scrolling:touch;
-}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(7,7,7,.95);border-bottom:1px solid var(--border);backdrop-filter:blur(12px)}
+.nav-left{display:flex;align-items:center;gap:12px}
+.nav-logo{height:30px;width:30px;object-fit:contain}
+.nav-brand{font-family:'Cinzel',serif;font-size:14px;font-weight:600;letter-spacing:.22em;color:var(--gold)}
+.nav-brand span{color:var(--text-faint);font-size:10px;font-weight:300;letter-spacing:.1em;margin-left:6px}
+.nav-links{display:flex;gap:28px}
+.nav-links a{font-size:10px;font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;transition:color .25s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--void);background:var(--gold);padding:10px 20px;text-decoration:none;transition:background .25s;white-space:nowrap}
+.nav-cta:hover{background:var(--gold2)}
 
-/* ═══════════════════════════════════════════
-   FIXED CHROME
-═══════════════════════════════════════════ */
-#progress{
-  position:fixed;top:0;left:0;height:2px;width:0;
-  background:linear-gradient(90deg,var(--amber),var(--gold),var(--gold2));
-  transition:width .5s ease;z-index:9999;
-  box-shadow:0 0 10px rgba(200,168,75,.7);
-}
-.dots{
-  position:fixed;right:12px;top:50%;transform:translateY(-50%);
-  display:flex;flex-direction:column;gap:7px;z-index:999;
-}
-.dot{width:4px;height:4px;border-radius:50%;background:rgba(200,168,75,.2);transition:all .4s;cursor:pointer}
-.dot.on{background:var(--gold);height:18px;border-radius:3px;box-shadow:0 0 10px rgba(200,168,75,.8)}
-.counter{
-  position:fixed;left:13px;bottom:18px;
-  font-family:'Cinzel',serif;font-size:8.5px;
-  color:rgba(200,168,75,.3);letter-spacing:.2em;z-index:999;
-}
+/* HERO */
+#hero{min-height:100vh;padding-top:64px;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:80px 56px;border-right:1px solid var(--border)}
+.hero-right{display:flex;flex-direction:column;justify-content:center;padding:60px 48px;background:radial-gradient(ellipse at 60% 50%,rgba(200,168,75,.06) 0%,transparent 70%)}
+.hero-eyebrow{font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--text-faint);margin-bottom:26px;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::before{content:"";width:24px;height:1px;background:var(--gold-dim)}
+.hero-title{font-family:'Cinzel',serif;font-size:clamp(36px,4.5vw,60px);font-weight:700;letter-spacing:.18em;line-height:1;background:linear-gradient(135deg,#a87c20 0%,#E2C56A 45%,#C8A84B 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
+.hero-sub{font-family:'Cormorant Garamond',serif;font-size:clamp(14px,1.6vw,19px);font-weight:300;font-style:italic;color:rgba(200,168,75,.5);letter-spacing:.06em;margin-bottom:6px}
+.hero-sub-zh{font-size:11px;letter-spacing:.26em;color:var(--text-faint);margin-bottom:40px}
+.hero-sep{width:44px;height:1px;background:var(--gold-dim);margin-bottom:32px}
+.hero-desc-en{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;line-height:1.85;color:var(--text-dim);margin-bottom:10px}
+.hero-desc-zh{font-size:11px;letter-spacing:.1em;line-height:2.1;color:var(--text-faint);margin-bottom:40px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-solid{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--void);background:var(--gold);padding:12px 28px;text-decoration:none;border:1px solid var(--gold);transition:all .25s}
+.btn-solid:hover{background:var(--gold2)}
+.btn-ghost{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);background:transparent;padding:12px 28px;text-decoration:none;border:1px solid var(--gold-dim);transition:all .25s}
+.btn-ghost:hover{border-color:var(--gold)}
 
-/* ═══════════════════════════════════════════
-   PARTICLES
-═══════════════════════════════════════════ */
-#pt{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
-.p{position:absolute;border-radius:50%;animation:pfloat linear infinite;opacity:0}
-@keyframes pfloat{
-  0%  {transform:translateY(108vh) translateX(0);opacity:0}
-  7%  {opacity:.9} 93%{opacity:.15}
-  100%{transform:translateY(-8vh) translateX(var(--d));opacity:0}
+/* Hero Right — service preview */
+.hero-svc-list{display:flex;flex-direction:column;width:100%;max-width:400px}
+.hero-svc{padding:20px 0;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:4px;transition:padding-left .3s}
+.hero-svc:first-child{border-top:1px solid var(--border)}
+.hero-svc:hover{padding-left:10px}
+.hs-num{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.28em;color:var(--gold-dim)}
+.hs-en{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.1em;color:var(--gold)}
+.hs-zh{font-size:10px;letter-spacing:.18em;color:var(--text-faint)}
+.hs-sep{width:20px;height:1px;background:var(--gold-dim);margin:4px 0}
+.hs-desc{font-size:11px;font-weight:300;line-height:1.7;color:var(--text-dim)}
+
+/* SECTION COMMON */
+.sec{padding:110px 56px}
+.sec-inner{max-width:1080px;margin:0 auto}
+.sec-label{font-size:9px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.sec-label::before{content:"";width:20px;height:1px;background:var(--gold-dim)}
+.sec-title-en{font-family:'Cinzel',serif;font-size:clamp(24px,3.2vw,40px);font-weight:600;letter-spacing:.06em;line-height:1.2;color:var(--text);margin-bottom:6px}
+.sec-title-zh{font-size:12px;letter-spacing:.24em;color:var(--text-faint);margin-bottom:52px}
+
+/* BRAND STORY */
+#story{background:var(--deep)}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:2px}
+.story-card{background:var(--card);border:1px solid var(--border);padding:44px 38px;position:relative;overflow:hidden;transition:all .3s}
+.story-card:hover{background:var(--card2);border-color:var(--border-h)}
+.story-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+.sc-root{font-size:9px;letter-spacing:.32em;color:var(--gold-dim);margin-bottom:10px}
+.sc-word-en{font-family:'Cinzel',serif;font-size:20px;letter-spacing:.14em;color:var(--gold);margin-bottom:6px}
+.sc-word-zh{font-size:13px;letter-spacing:.22em;color:var(--text-faint);margin-bottom:18px}
+.sc-sep{width:28px;height:1px;background:var(--gold-dim);margin-bottom:18px}
+.sc-desc-en{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:300;line-height:1.85;color:var(--text-dim);margin-bottom:10px}
+.sc-desc-zh{font-size:11px;letter-spacing:.08em;line-height:2;color:var(--text-faint)}
+.story-union{background:var(--card);border:1px solid var(--border);padding:36px;text-align:center}
+.union-formula{font-family:'Cinzel',serif;font-size:clamp(14px,1.8vw,20px);letter-spacing:.1em;color:var(--text-dim);margin-bottom:10px}
+.union-formula span{color:var(--gold)}
+.union-zh{font-size:12px;letter-spacing:.2em;color:var(--text-faint)}
+
+/* PHILOSOPHY */
+.phil-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:52px}
+.phil-card{background:var(--card);border:1px solid var(--border);padding:40px 32px;position:relative;overflow:hidden;transition:all .3s}
+.phil-card:hover{background:var(--card2);border-color:var(--border-h)}
+.phil-card::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold-dim);transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.phil-card:hover::after{transform:scaleX(1)}
+.phil-num{font-family:'Cinzel',serif;font-size:38px;color:var(--gold-dim);line-height:1;margin-bottom:18px}
+.phil-en{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.14em;color:var(--gold);margin-bottom:5px}
+.phil-zh{font-size:12px;letter-spacing:.18em;color:var(--text-faint);margin-bottom:16px}
+.phil-sep{width:28px;height:1px;background:var(--gold-dim);margin-bottom:16px}
+.phil-body-en{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;line-height:1.85;color:var(--text-dim);margin-bottom:8px}
+.phil-body-zh{font-size:10px;letter-spacing:.08em;line-height:2;color:var(--text-faint)}
+
+/* SERVICES */
+#services{background:var(--void)}
+.svc-intro{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:48px;align-items:start}
+.svc-intro-en{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;line-height:1.85;color:var(--text-dim)}
+.svc-intro-zh{font-size:11px;letter-spacing:.1em;line-height:2.1;color:var(--text-faint)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.svc-card{background:var(--card);border:1px solid var(--border);padding:32px 26px;position:relative;overflow:hidden;transition:all .3s}
+.svc-card:hover{background:var(--card2);border-color:var(--border-h)}
+.svc-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);transform:scaleY(0);transform-origin:top;transition:transform .3s}
+.svc-card:hover::before{transform:scaleY(1)}
+.svc-icon{font-size:22px;margin-bottom:14px;display:block}
+.svc-en{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.1em;color:var(--gold);margin-bottom:4px}
+.svc-zh{font-size:10px;letter-spacing:.18em;color:rgba(200,168,75,.45);margin-bottom:12px}
+.svc-sep{width:20px;height:1px;background:var(--gold-dim);margin-bottom:12px}
+.svc-desc-en{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:300;line-height:1.75;color:var(--text-dim);margin-bottom:6px}
+.svc-desc-zh{font-size:10px;letter-spacing:.07em;line-height:1.9;color:var(--text-faint)}
+
+/* PROCESS BAR */
+.process{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-top:48px}
+.proc{padding:28px;border-right:1px solid var(--border)}
+.proc:last-child{border-right:none}
+.proc-n{font-family:'Cinzel',serif;font-size:24px;color:var(--gold-dim);margin-bottom:8px}
+.proc-en{font-size:11px;font-weight:400;letter-spacing:.12em;color:var(--text);margin-bottom:3px}
+.proc-zh{font-size:10px;letter-spacing:.14em;color:var(--text-faint)}
+
+/* TRADE */
+#trade{background:var(--deep)}
+.trade-layout{display:grid;grid-template-columns:1fr 320px;gap:56px}
+.trade-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.tc{background:var(--card);border:1px solid var(--border);padding:30px 22px;transition:all .3s;display:flex;flex-direction:column;gap:8px}
+.tc:hover{background:var(--card2);border-color:var(--border-h)}
+.tc-icon{font-size:24px}
+.tc-en{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.1em;color:var(--gold)}
+.tc-zh{font-size:10px;letter-spacing:.16em;color:rgba(200,168,75,.4)}
+.tc-sep{width:20px;height:1px;background:var(--gold-dim)}
+.tc-desc-en{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:300;line-height:1.75;color:var(--text-dim)}
+.tc-desc-zh{font-size:10px;letter-spacing:.07em;line-height:1.9;color:var(--text-faint)}
+.trade-side-en{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;line-height:1.85;color:var(--text-dim);margin-bottom:10px}
+.trade-side-zh{font-size:11px;letter-spacing:.1em;line-height:2.1;color:var(--text-faint);margin-bottom:28px}
+.mkt-tags{display:flex;flex-wrap:wrap;gap:7px}
+.mkt-tag{font-size:9px;letter-spacing:.12em;color:var(--text-faint);padding:5px 11px;border:1px solid var(--border);transition:all .25s}
+.mkt-tag:hover{color:var(--gold);border-color:var(--gold-dim)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border);margin-top:44px}
+.stat{padding:28px;text-align:center;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-n{font-family:'Cinzel',serif;font-size:30px;color:var(--gold);margin-bottom:6px}
+.stat-en{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint);margin-bottom:2px}
+.stat-zh{font-size:9px;letter-spacing:.14em;color:var(--text-faint)}
+
+/* BRANDS */
+#brands{background:var(--void)}
+.brands-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:52px}
+.brand-card{padding:40px 24px;text-align:center;border:1px solid var(--border);transition:all .35s;position:relative;overflow:hidden}
+.brand-card:hover{background:var(--card)}
+.brand-card::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.brand-card:hover::after{transform:scaleX(1)}
+.bc-chaosor::after{background:var(--gold)}
+.bc-sophstar::after{background:var(--teal)}
+.bc-orgvie::after{background:var(--green)}
+.bc-zelopia::after{background:#8B6B4E}
+.brand-name{font-family:'Cinzel',serif;font-size:16px;font-weight:700;letter-spacing:.16em;margin-bottom:5px}
+.bc-chaosor .brand-name{color:var(--gold)}
+.bc-sophstar .brand-name{color:#4a9a98}
+.bc-orgvie .brand-name{color:#6aaa68}
+.bc-zelopia .brand-name{color:#b8956a}
+.brand-meaning{font-family:'Cormorant Garamond',serif;font-size:11px;font-style:italic;color:var(--text-faint);margin-bottom:10px}
+.brand-tag-en{font-size:9px;letter-spacing:.14em;color:var(--text-faint);margin-bottom:3px}
+.brand-tag-zh{font-size:9px;letter-spacing:.12em;color:var(--text-faint)}
+
+/* MANIFESTO */
+#manifesto{background:var(--deep);padding:130px 56px;text-align:center;position:relative;overflow:hidden}
+.mani-inner{max-width:700px;margin:0 auto;position:relative;z-index:2}
+.mani-label{font-size:9px;letter-spacing:.5em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:32px}
+.mani-zh{font-family:'Josefin Sans',sans-serif;font-size:clamp(16px,2.8vw,28px);font-weight:100;letter-spacing:.14em;line-height:1.9;color:var(--text-dim);margin-bottom:18px}
+.mani-en{font-family:'Cormorant Garamond',serif;font-size:clamp(14px,2.2vw,22px);font-style:italic;font-weight:300;line-height:1.8;color:rgba(200,168,75,.45);margin-bottom:44px}
+.mani-sig{font-family:'Cinzel',serif;font-size:clamp(28px,4vw,48px);font-weight:700;letter-spacing:.2em;background:linear-gradient(135deg,#a87c20,#E2C56A,#C8A84B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.mani-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:.02;pointer-events:none}
+
+/* CONTACT */
+#contact{background:var(--void);padding:110px 56px;border-top:1px solid var(--border)}
+.contact-inner{max-width:720px;margin:0 auto;text-align:center}
+.contact-en{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.6vw,30px);font-style:italic;font-weight:300;color:rgba(200,168,75,.6);margin-bottom:10px;line-height:1.5}
+.contact-zh{font-size:12px;letter-spacing:.22em;color:var(--text-faint);margin-bottom:44px}
+.contact-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:44px}
+.contact-info{display:flex;flex-direction:column;gap:12px;align-items:center}
+.ci{font-size:11px;font-weight:300;letter-spacing:.14em;color:var(--text-dim);display:flex;align-items:center;gap:9px}
+.ci-dot{width:4px;height:4px;border-radius:50%;background:var(--gold-dim);flex-shrink:0}
+
+/* FOOTER */
+footer{background:var(--void);border-top:1px solid var(--border);padding:32px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.ft-left{display:flex;align-items:center;gap:10px}
+.ft-logo{height:22px;width:22px;object-fit:contain;opacity:.55}
+.ft-brand{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.2em;color:rgba(200,168,75,.4)}
+.ft-copy{font-size:9px;letter-spacing:.1em;color:var(--text-faint)}
+
+/* SCROLL REVEAL */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv.on{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  nav{padding:0 18px}
+  .nav-links{display:none}
+  #hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .hero-left,.sec{padding:60px 22px}
+  #manifesto,#contact{padding:80px 22px}
+  .story-grid,.phil-grid,.svc-grid,.trade-cards,.brands-grid{grid-template-columns:1fr}
+  .svc-intro,.trade-layout{grid-template-columns:1fr}
+  .process,.stats{grid-template-columns:1fr 1fr}
+  footer{flex-direction:column;text-align:center;padding:24px 22px}
 }
-
-/* ═══════════════════════════════════════════
-   ANIMATION LIBRARY
-═══════════════════════════════════════════ */
-@keyframes fadeUp    {from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn    {from{opacity:0}to{opacity:1}}
-@keyframes scaleIn   {from{opacity:0;transform:scale(.72)}to{opacity:1;transform:scale(1)}}
-@keyframes shimmer   {0%{background-position:-200% center}100%{background-position:200% center}}
-@keyframes ringPulse {
-  0%,100%{opacity:.22;transform:translate(-50%,-50%) scale(1)}
-  50%    {opacity:.04;transform:translate(-50%,-50%) scale(1.07)}
-}
-@keyframes spinCW  {from{transform:rotate(0)}  to{transform:rotate(360deg)}}
-@keyframes spinCCW {from{transform:rotate(360deg)} to{transform:rotate(0)}}
-@keyframes breathe {0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.65;transform:scale(1.12)}}
-@keyframes pulse   {0%,100%{opacity:1}50%{opacity:.2}}
-@keyframes lineGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@keyframes borderGlow{
-  0%,100%{box-shadow:0 0 12px rgba(200,168,75,.15)}
-  50%    {box-shadow:0 0 30px rgba(200,168,75,.5),0 0 60px rgba(200,168,75,.1)}
-}
-@keyframes textGlow{
-  0%,100%{text-shadow:0 0 20px rgba(200,168,75,.2)}
-  50%    {text-shadow:0 0 40px rgba(200,168,75,.5),0 0 80px rgba(200,168,75,.15)}
-}
-@keyframes gridFloat{
-  0%,100%{opacity:.045}50%{opacity:.09}
-}
-
-/* activate on .on class */
-.slide.on .a1{animation:fadeUp .9s .05s both}
-.slide.on .a2{animation:fadeUp .9s .20s both}
-.slide.on .a3{animation:fadeUp .9s .35s both}
-.slide.on .a4{animation:fadeUp .9s .50s both}
-.slide.on .a5{animation:fadeUp .9s .65s both}
-.slide.on .a6{animation:fadeUp .9s .80s both}
-.slide.on .a7{animation:fadeUp .9s .95s both}
-.slide.on .asc{animation:scaleIn 1.1s .2s both}
-.slide.on .afi{animation:fadeIn 1.3s .1s both}
-.slide.on .agrow{animation:lineGrow .9s .6s both}
-
-/* ═══════════════════════════════════════════
-   SHARED UI ATOMS
-═══════════════════════════════════════════ */
-.tag{
-  font-size:8px;letter-spacing:.5em;text-transform:uppercase;
-  color:var(--gold);display:flex;align-items:center;gap:10px;
-  margin-bottom:14px;font-weight:400;
-}
-.tag::before,.tag::after{content:'';height:1px;width:16px;background:var(--gold);opacity:.35}
-.w100{width:100%}
-
-.dv{display:flex;align-items:center;gap:8px;width:100%;margin:13px 0}
-.dvl{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
-.dvl.r{background:linear-gradient(90deg,var(--gold),transparent)}
-.dvd{
-  width:5px;height:5px;background:var(--gold);
-  transform:rotate(45deg);flex-shrink:0;
-  box-shadow:0 0 8px rgba(200,168,75,.6);
-}
-.orb{position:absolute;border-radius:50%;filter:blur(75px);pointer-events:none}
-
-/* grid texture overlay — from v1 */
-.grid-tex{
-  position:absolute;inset:0;pointer-events:none;
-  background-image:
-    linear-gradient(rgba(200,168,75,.5) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(200,168,75,.5) 1px,transparent 1px);
-  background-size:44px 44px;
-  opacity:.045;
-  animation:gridFloat 5s ease-in-out infinite;
-}
-
-.sec-title{
-  font-family:'Cinzel',serif;
-  font-size:clamp(20px,6vw,28px);
-  font-weight:600;color:var(--white);
-  letter-spacing:.05em;line-height:1.2;
-  margin-bottom:16px;width:100%;
-}
-.sec-title em{font-family:'Crimson Pro',serif;font-style:italic;color:var(--gold);font-size:1.08em}
-
-/* ═══════════════════════════════════════════
-   S1 — HERO
-═══════════════════════════════════════════ */
-#s1{
-  background:
-    radial-gradient(ellipse at 50% 100%,rgba(139,94,26,.18) 0%,transparent 55%),
-    radial-gradient(ellipse at 15% 15%,rgba(42,107,107,.1) 0%,transparent 45%),
-    var(--void);
-  text-align:center;
-}
-/* chaos rings */
-.rings{position:absolute;inset:0;pointer-events:none}
-.ring{
-  position:absolute;border-radius:50%;
-  border:1px solid rgba(200,168,75,.08);
-  top:50%;left:50%;
-  animation:ringPulse ease-in-out infinite;
-}
-.rg1{width:155px;height:155px;animation-duration:6s}
-.rg2{width:260px;height:260px;animation-duration:9s;animation-delay:1.5s}
-.rg3{width:370px;height:370px;animation-duration:12s;animation-delay:3s}
-.rg4{width:480px;height:480px;animation-duration:15s;animation-delay:4.5s}
-.rg5{width:600px;height:600px;animation-duration:18s;animation-delay:6s;border-color:rgba(200,168,75,.04)}
-
-.h-eye{
-  font-size:7.5px;letter-spacing:.55em;color:var(--gold);text-transform:uppercase;
-  display:flex;align-items:center;gap:12px;justify-content:center;
-}
-.h-eye::before,.h-eye::after{content:'';width:22px;height:1px;background:var(--gold);opacity:.45}
-
-/* logo with glow pseudo — from v1 */
-.h-logo-wrap{position:relative;z-index:1;margin-top:16px}
-.h-logo{
-  font-family:'Cinzel',serif;
-  font-size:clamp(54px,17vw,84px);
-  font-weight:900;letter-spacing:.14em;line-height:1;
-  background:linear-gradient(135deg,var(--gold2) 0%,var(--gold) 35%,var(--amber) 65%,var(--gold) 100%);
-  background-size:300% auto;
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  animation:shimmer 6s linear infinite,textGlow 4s ease-in-out infinite;
-  position:relative;z-index:1;
-}
-/* glowing blur double — from v1 */
-.h-logo::after{
-  content:'CHAOSOR';
-  position:absolute;inset:0;
-  background:linear-gradient(135deg,var(--gold2),var(--gold));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  filter:blur(22px);opacity:.25;z-index:-1;
-}
-
-.h-tagline{
-  font-family:'Crimson Pro',serif;font-style:italic;
-  font-size:clamp(13px,4.2vw,18px);color:var(--light);letter-spacing:.04em;margin-top:5px;
-}
-.h-sub{font-size:7.5px;letter-spacing:.38em;color:var(--silver);text-transform:uppercase;margin-top:7px}
-
-.scroll-hint{
-  position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:5px;
-  opacity:0;animation:fadeIn 1s 2.8s forwards;
-}
-.sh-line{
-  width:1px;height:32px;
-  background:linear-gradient(180deg,var(--gold),transparent);
-  animation:pulse 2.2s ease-in-out infinite;
-}
-.sh-txt{font-size:6.5px;letter-spacing:.32em;color:var(--silver);text-transform:uppercase}
-
-/* ═══════════════════════════════════════════
-   S2 — CHAOS SYMBOL
-═══════════════════════════════════════════ */
-#s2{background:var(--deep);text-align:center}
-
-.sym-wrap{position:relative;width:200px;height:200px;margin:16px auto}
-/* three layers: outer CW dash, mid CCW dash, core CCW */
-.sym-r-out{position:absolute;inset:-24px;animation:spinCW 28s linear infinite;opacity:.2}
-.sym-r-mid{position:absolute;inset:-6px; animation:spinCCW 18s linear infinite;opacity:.15}
-.sym-core {position:absolute;inset:0;    animation:spinCCW 12s linear infinite}
-.sym-glow {
-  position:absolute;inset:18px;
-  background:radial-gradient(circle,rgba(200,168,75,.15),transparent 70%);
-  border-radius:50%;animation:breathe 3.5s ease-in-out infinite;
-}
-.sym-label{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  font-family:'Cinzel',serif;font-size:10px;color:var(--gold);
-  letter-spacing:.2em;text-align:center;line-height:1.7;
-  white-space:nowrap;z-index:2;
-  text-shadow:0 0 12px rgba(200,168,75,.5);
-}
-.sym-quote{
-  font-size:11.5px;color:var(--silver);text-align:center;
-  line-height:2;max-width:268px;margin-top:18px;
-}
-.sym-quote em{color:var(--gold);font-style:italic}
-
-/* ═══════════════════════════════════════════
-   S3 — NAME MEANING  (grid texture from v1)
-═══════════════════════════════════════════ */
-#s3{background:var(--void);justify-content:flex-start;padding-top:55px;padding-bottom:34px;overflow-y:auto}
-
-.mc{border-radius:14px;padding:20px 18px;position:relative;overflow:hidden;margin-bottom:10px;width:100%}
-.mc.cc{background:linear-gradient(135deg,#120404,#0A0A18);border:1px solid rgba(192,56,56,.38)}
-.mc.oc{background:linear-gradient(135deg,#120E00,#080812);border:1px solid rgba(200,168,75,.38)}
-
-/* grid texture inside name cards — from v1 */
-.mc .grid-tex{opacity:.06}
-
-.mc-ghost{
-  font-family:'Cinzel',serif;font-size:76px;font-weight:900;
-  position:absolute;right:-4px;top:-8px;line-height:1;opacity:.09;pointer-events:none;
-}
-.cc .mc-ghost{color:var(--crimson)}.oc .mc-ghost{color:var(--gold)}
-.mc-lang{font-size:7.5px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:8px}
-.cc .mc-lang{color:var(--crimson)}.oc .mc-lang{color:var(--gold)}
-.mc-word{font-family:'Cinzel',serif;font-size:24px;font-weight:900;color:var(--white);margin-bottom:7px;letter-spacing:.06em}
-.mc-body{font-size:11.5px;color:var(--silver);line-height:1.9;position:relative;z-index:1;max-width:235px}
-
-.mc-union{
-  background:linear-gradient(135deg,rgba(200,168,75,.09),rgba(192,56,56,.06));
-  border:1px solid rgba(200,168,75,.25);border-radius:14px;
-  padding:18px;text-align:center;width:100%;margin-top:10px;
-}
-.mcu-t{font-family:'Cinzel',serif;font-size:14px;color:var(--white);margin-bottom:7px}
-.mcu-t span{color:var(--gold)}
-.mcu-s{font-size:10.5px;color:var(--silver);line-height:1.85;font-style:italic}
-
-/* ═══════════════════════════════════════════
-   S4-6 — PHILOSOPHY
-═══════════════════════════════════════════ */
-.phil{background:var(--deep)}
-.phil-ghost{
-  font-family:'Cinzel',serif;font-size:47vw;font-weight:900;
-  color:rgba(200,168,75,.025);
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  pointer-events:none;line-height:1;
-}
-.pn{font-family:'Cinzel',serif;font-size:52px;font-weight:900;color:rgba(200,168,75,.1);line-height:1;margin-bottom:10px}
-.pe{font-family:'Cinzel',serif;font-size:clamp(18px,5.5vw,25px);color:var(--gold);letter-spacing:.04em;font-weight:700;margin-bottom:4px;line-height:1.28}
-.pz{font-size:13px;color:var(--light);letter-spacing:.14em;margin-bottom:18px}
-.pl{width:42px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin-bottom:18px;transform-origin:left}
-.pb{font-size:12.5px;color:var(--silver);line-height:2.05;max-width:295px;font-weight:300}
-.pq{margin-top:22px;padding:14px 16px;border-left:2px solid var(--gold);background:rgba(200,168,75,.05);border-radius:0 10px 10px 0}
-.pqt{font-family:'Crimson Pro',serif;font-style:italic;font-size:13px;color:var(--light);line-height:1.78}
-
-/* ═══════════════════════════════════════════
-   S7 — BRAND ARCHITECTURE
-═══════════════════════════════════════════ */
-#s7{background:var(--void)}
-
-/* main CHAOSOR card — v1 style with grid + glow border */
-.arch-head{
-  width:100%;
-  background:linear-gradient(135deg,rgba(200,168,75,.14),rgba(200,168,75,.04));
-  border:1.5px solid rgba(200,168,75,.55);
-  border-radius:16px;padding:22px;text-align:center;
-  margin-bottom:6px;
-  animation:borderGlow 3.5s ease-in-out infinite;
-  position:relative;overflow:hidden;
-}
-.arch-head .grid-tex{opacity:.065}
-.arch-head-name{
-  font-family:'Cinzel',serif;font-size:30px;font-weight:900;
-  background:linear-gradient(135deg,var(--gold2),var(--gold));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  letter-spacing:.15em;margin-bottom:5px;position:relative;z-index:1;
-}
-.arch-head-role{font-size:8px;letter-spacing:.28em;color:var(--silver);text-transform:uppercase;position:relative;z-index:1}
-
-.arch-conn{display:flex;flex-direction:column;align-items:center;margin:4px 0}
-.arch-vl{width:1px;height:10px;background:var(--gold);opacity:.45}
-.arch-hl{width:74%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.38}
-
-/* brand cards — 3 sub brands, very prominent */
-.bcards{display:flex;flex-direction:column;gap:11px;width:100%}
-.bc{border-radius:15px;padding:19px 17px;position:relative;overflow:hidden}
-/* coloured left bar */
-.bc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px}
-/* hover-style bottom line — from v1 */
-.bc::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
-  transform:scaleX(0);transform-origin:left;transition:transform .5s;
-}
-.bc:active::after{transform:scaleX(1)}
-
-.bc.bs{background:linear-gradient(135deg,rgba(42,107,107,.16),rgba(42,107,107,.04));border:1px solid rgba(42,107,107,.45)}
-.bc.bo{background:linear-gradient(135deg,rgba(58,106,56,.16),rgba(58,106,56,.04)); border:1px solid rgba(58,106,56,.45)}
-.bc.bz{background:linear-gradient(135deg,rgba(106,74,42,.16),rgba(106,74,42,.04)); border:1px solid rgba(106,74,42,.45)}
-.bc.bs::before,.bc.bs::after{background:linear-gradient(90deg,var(--teal),var(--cyan))}
-.bc.bo::before,.bc.bo::after{background:linear-gradient(90deg,var(--green),#5A9A57)}
-.bc.bz::before,.bc.bz::after{background:linear-gradient(90deg,var(--brown),#9A7050)}
-
-.bc-bg{
-  position:absolute;right:-4px;bottom:-8px;
-  font-family:'Cinzel',serif;font-size:50px;font-weight:900;
-  opacity:.055;line-height:1;letter-spacing:.05em;pointer-events:none;
-}
-.bs .bc-bg{color:var(--teal)}.bo .bc-bg{color:var(--green)}.bz .bc-bg{color:var(--brown)}
-
-.bc-top{display:flex;align-items:center;gap:12px;margin-bottom:9px}
-.bc-icon{font-size:25px;flex-shrink:0}
-.bc-name{font-family:'Cinzel',serif;font-size:19px;font-weight:900;letter-spacing:.08em}
-.bs .bc-name{color:var(--teal)}.bo .bc-name{color:var(--green)}.bz .bc-name{color:var(--brown)}
-.bc-tag{font-size:7.5px;letter-spacing:.2em;text-transform:uppercase;display:block;margin-bottom:8px}
-.bs .bc-tag{color:var(--teal)}.bo .bc-tag{color:var(--green)}.bz .bc-tag{color:var(--brown)}
-.bc-desc{font-size:11px;color:var(--silver);line-height:1.88}
-
-.arch-chain{
-  text-align:center;margin-top:13px;padding:13px;
-  background:rgba(200,168,75,.05);border-radius:11px;
-  border:1px solid rgba(200,168,75,.1);width:100%;
-}
-.ac-main{font-size:10px;color:var(--gold);letter-spacing:.09em;margin-bottom:4px}
-.ac-sub{font-size:9px;color:var(--silver);font-style:italic}
-
-/* ═══════════════════════════════════════════
-   S8 — SUB BRANDS DEEP
-═══════════════════════════════════════════ */
-#s8{background:var(--deep)}
-
-.sb{width:100%;border-radius:16px;padding:21px 18px;margin-bottom:12px;position:relative;overflow:hidden}
-.sb.ss{background:linear-gradient(135deg,rgba(42,107,107,.17),rgba(42,107,107,.04));border:1.5px solid rgba(42,107,107,.52)}
-.sb.so{background:linear-gradient(135deg,rgba(58,106,56,.17),rgba(58,106,56,.04)); border:1.5px solid rgba(58,106,56,.52)}
-.sb.sz{background:linear-gradient(135deg,rgba(106,74,42,.17),rgba(106,74,42,.04)); border:1.5px solid rgba(106,74,42,.52)}
-
-/* grid texture in brand detail cards too */
-.sb .grid-tex{opacity:.05}
-
-.sb-bg{position:absolute;right:-8px;bottom:-12px;font-family:'Cinzel',serif;font-size:66px;font-weight:900;opacity:.042;line-height:1;pointer-events:none;letter-spacing:.05em}
-.ss .sb-bg{color:var(--teal)}.so .sb-bg{color:var(--green)}.sz .sb-bg{color:var(--brown)}
-
-.sb-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.sb-icon{font-size:30px}
-.sb-name{font-family:'Cinzel',serif;font-size:21px;font-weight:900;letter-spacing:.1em}
-.ss .sb-name{color:var(--teal)}.so .sb-name{color:var(--green)}.sz .sb-name{color:var(--brown)}
-.sb-role{font-size:7.5px;letter-spacing:.25em;text-transform:uppercase;margin-top:2px}
-.ss .sb-role{color:var(--teal)}.so .sb-role{color:var(--green)}.sz .sb-role{color:var(--brown)}
-.sb-hr{height:1px;background:rgba(255,255,255,.055);margin-bottom:12px}
-.sb-desc{font-size:11.5px;color:var(--silver);line-height:1.92}
-.sb-motto{font-size:11px;margin-top:10px;padding:10px 13px;background:rgba(0,0,0,.22);border-radius:8px;font-style:italic}
-.ss .sb-motto{color:var(--teal)}.so .sb-motto{color:var(--green)}.sz .sb-motto{color:var(--brown)}
-
-/* ═══════════════════════════════════════════
-   S-ORIGIN — 起源 (new from v1)
-═══════════════════════════════════════════ */
-#s-origin{background:linear-gradient(180deg,var(--void),var(--deep) 50%,var(--void))}
-
-.origin-quote-box{
-  margin-top:20px;padding:18px 20px;
-  border-left:2px solid var(--gold);
-  background:rgba(200,168,75,.05);
-  border-radius:0 12px 12px 0;
-}
-.oqb-text{font-family:'Crimson Pro',serif;font-style:italic;font-size:13px;color:var(--light);line-height:1.78;margin-bottom:8px}
-.oqb-attr{font-size:7.5px;letter-spacing:.22em;color:var(--gold);text-transform:uppercase}
-
-.origin-body{font-size:12px;color:var(--silver);line-height:2;max-width:300px;font-weight:300}
-
-/* ═══════════════════════════════════════════
-   S-VISION — 集团定位 (new from v1)
-═══════════════════════════════════════════ */
-#s-vision{background:var(--deep)}
-
-.vgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;margin-top:16px}
-.vc{border-radius:14px;padding:18px 15px;position:relative;overflow:hidden;transition:transform .3s}
-.vc:active{transform:scale(.97)}
-.vc.vd{background:var(--coal);border:1px solid var(--muted)}
-.vc.vg{
-  background:linear-gradient(135deg,rgba(200,168,75,.12),rgba(200,168,75,.04));
-  border:1px solid rgba(200,168,75,.22);
-}
-/* grid texture in vision cards too */
-.vc .grid-tex{opacity:.055}
-/* hover bottom line — from v1 */
-.vc::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--gold),var(--crimson));
-  transform:scaleX(0);transform-origin:left;transition:transform .5s;
-}
-.vc:active::after{transform:scaleX(1)}
-.vc-lbl{font-size:7.5px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
-.vc-txt{font-family:'Crimson Pro',serif;font-size:13px;line-height:1.78;color:var(--light)}
-
-/* ═══════════════════════════════════════════
-   S9 — COLOR SYSTEM
-═══════════════════════════════════════════ */
-#s9{background:var(--void);justify-content:flex-start;padding-top:55px;padding-bottom:36px}
-.pal{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;margin-top:13px}
-.pc{border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.045);transition:transform .3s}
-.pc:active{transform:scale(.96)}
-.pc-sw{height:56px}
-.pc-info{background:var(--coal);padding:9px 8px}
-.pc-name{font-size:7.5px;font-weight:500;color:var(--white);margin-bottom:2px}
-.pc-hex{font-size:6.5px;color:var(--silver);letter-spacing:.04em}
-.pc-role{font-size:6px;color:var(--gold);margin-top:3px;letter-spacing:.05em}
-.pal-note{font-size:9.5px;color:var(--silver);text-align:center;margin-top:14px;line-height:1.9;font-style:italic}
-
-/* ═══════════════════════════════════════════
-   S10 — MANIFESTO  (full v1 quality)
-═══════════════════════════════════════════ */
-#s10{
-  background:linear-gradient(140deg,#040300,#06000E,#040500);
-  text-align:center;
-}
-.man-ghost{
-  position:absolute;font-family:'Cinzel',serif;font-size:30vw;font-weight:900;
-  color:rgba(200,168,75,.022);
-  top:50%;left:50%;transform:translate(-50%,-50%);
-  white-space:nowrap;pointer-events:none;letter-spacing:.06em;
-}
-.man-main{
-  font-family:'Cinzel',serif;
-  font-size:clamp(23px,7.2vw,34px);
-  font-weight:600;color:var(--white);
-  line-height:1.55;position:relative;z-index:1;
-  margin-bottom:15px;letter-spacing:.04em;
-}
-.man-main span{color:var(--gold)}
-.man-en{
-  font-family:'Crimson Pro',serif;font-style:italic;
-  font-size:11.5px;color:var(--silver);line-height:1.92;
-  position:relative;z-index:1;max-width:248px;
-}
-.man-mark{
-  font-family:'Cinzel',serif;font-size:20px;font-weight:900;
-  letter-spacing:.2em;
-  background:linear-gradient(135deg,var(--gold2),var(--gold),var(--amber));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  margin-top:26px;position:relative;z-index:1;
-  animation:shimmer 5s linear infinite,textGlow 4s ease-in-out infinite;
-  background-size:200% auto;
-}
-
-/* ═══════════════════════════════════════════
-   S11 — END CARD
-═══════════════════════════════════════════ */
-#s11{background:var(--void);text-align:center}
-.end-logo{
-  font-family:'Cinzel',serif;
-  font-size:clamp(46px,15vw,70px);
-  font-weight:900;letter-spacing:.14em;
-  background:linear-gradient(135deg,var(--gold2),var(--gold),var(--amber));
-  background-size:200% auto;
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  animation:shimmer 5s linear infinite;
-}
-.end-logo::after{
-  content:'CHAOSOR';
-  position:absolute;inset:0;
-  background:linear-gradient(135deg,var(--gold2),var(--gold));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  filter:blur(20px);opacity:.2;z-index:-1;
-}
-.end-logo-wrap{position:relative;z-index:1}
-
-.end-pills{display:flex;gap:9px;justify-content:center;margin:18px 0;flex-wrap:wrap}
-.ep{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.18em;border-radius:20px;padding:7px 15px;text-transform:uppercase;font-weight:700}
-.ep.es{color:var(--teal); border:1.5px solid rgba(42,107,107,.55);background:rgba(42,107,107,.08)}
-.ep.eo{color:var(--green);border:1.5px solid rgba(58,106,56,.55); background:rgba(58,106,56,.08)}
-.ep.ez{color:var(--brown);border:1.5px solid rgba(106,74,42,.55); background:rgba(106,74,42,.08)}
-.end-tag{
-  font-family:'Crimson Pro',serif;font-style:italic;
-  font-size:15px;color:var(--light);line-height:1.78;max-width:248px;
-}
-.end-tag strong{color:var(--gold);font-style:normal;font-family:'Cinzel',serif;font-size:12px;letter-spacing:.1em}
-.end-url{font-size:8px;letter-spacing:.3em;color:rgba(200,168,75,.3);margin-top:22px;text-transform:uppercase}
 </style>
 </head>
 <body>
 
-<div id="pt"></div>
-<div id="progress"></div>
-<div class="dots" id="dots"></div>
-<div class="counter" id="ctr">01 / 14</div>
-
-<div class="slides" id="slides">
-
-<!-- ════════ S1: HERO ════════ -->
-<div class="slide" id="s1">
-  <div class="rings">
-    <div class="ring rg1"></div><div class="ring rg2"></div>
-    <div class="ring rg3"></div><div class="ring rg4"></div><div class="ring rg5"></div>
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <img class="nav-logo" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAABDqADAAQAAAABAAABAAAAAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/8AAEQgBAAEOAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/bAEMAAQEBAQEBAgEBAgMCAgIDBAMDAwMEBgQEBAQEBgcGBgYGBgYHBwcHBwcHBwgICAgICAkJCQkJCwsLCwsLCwsLC//bAEMBAgICAwMDBQMDBQsIBggLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLC//dAAQAEf/aAAwDAQACEQMRAD8A/h/oooryzoCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/9D+H+iiivLOgKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/0f4f6KKK8s6AooooAKKKKACiiigAooooAKK1dD0LXPE+r2/h/wANWc+oX924jgtraNpppXPRURQWYn0AJr9xf2WP+CGPxr+Jkdv4q/aO1AeB9Jkw40+ELcapIp7MOYoMjBG4u46NGDXmZnnODy+n7TF1VHsur9EtWdOGwdbES5aUb/l95+EtfYPwe/YE/bD+O6RXfw58A6pNZzYK3l2gsbVlP8Sy3JjRgP8AZJPpzX9k/wCz7/wT5/ZJ/Zpjgufhx4QtZdUhA/4muoj7ZfFh/EJJMiM+0QQe1faFfmuZeKFm44Ch85//ACK/+SPo8Pw11rz+S/zf+R/JT8PP+CA37SWvRpc/EfxXoXh5H6x2/nX86fUBYo8/SQj3r638Nf8ABvZ8L7VFHjH4kapfN/EbOxitAfoHefH51+xfxL/bG/ZW+D8klt8R/iBoemXMWd9s15HJcjH/AExjLS/+O18ZeKv+C1X7A/hyRotM1/UdbKcZsdNnAJ9jcLDn+VeKuI+Ksb72HjLlf8tPT72n+Z2f2fldHSbV/OX6XPE7b/ggF+yIkeLzxR4vkb1S6skH5Gyb+dZmqf8ABv7+y7LGRovjDxTbt2M8tpMPyW2j/nXSXX/BfP8AY1t5CkOg+L5x/eSytAP/AB69U1q6T/wXi/Yp1GQJeaf4osAf4p7GBgP+/VzIf0qvacYr3v3n3L8hcuUPT3T5P8Y/8G88Bjab4f8AxPYMPuw6hpmQfrLHOMf9+zXxD8T/APgh/wDtueBI5Lvwpb6R4vgTLAabeCKbaPVLpYOfZWY+mTX9Cfgn/grd+wF44kS2g8eR6ZO//LPUrS5tQM+sjxeV/wCP19x+Avit8L/inYf2p8MvEemeIbcAMZNNu4rpQD6mNmx+NT/rfxLgXfFwdv79O34pR/Mf9k5dX/hP7pX/AMz/AD2Pif8ABD4w/BXU/wCx/i34Y1Pw5Ox2oNQtpIFkx/cZgFce6kivLa/0oNf8O+H/ABXpM2geKbG31KxuBtltrqJZoZB6MjgqR9RX5JftI/8ABFb9lD4zwz6v8MoZPh7rbglZNNHmWLOem+0chQPaFohX02V+JuGqNQx1Jwfde8vmt18rnm4nhupHWhK/k9H/AJfkfxmUV99/tX/8E2P2oP2SHm1jxhpI1nw1GTt1vSt09qF7ecMCSA4xnzFCZOFZq+BK/R8HjaGKpqthpqUX1Tv/AF6Hz1WjUpS5KkbPzCiiiuoyCiiigAooooAKKKKACiiigD//0v4f6KKK8s6AooooAKKKKACiiigAr7s/Yu/4J8/HL9tTxFt8Hwf2R4Ztn23uvXkbG2iI6pEBgzS/7CkAcbmUEGvqb/gmv/wSv8R/tWXFv8XvjGs+kfD2GTMSrmO41ZkOCkR6pCCMPKOScqnOWT+wDwb4M8KfDzwtY+CPA2nwaVpGmRLBa2lsgjiijXoFUfmT1JOTya/OeLOOoYFywmBtKt1e6j/nLy2XXsfQ5VkjrWq19IdF1f8AwD5W/ZK/YM/Z7/Y50Fbb4a6WLrW5UC3et3oEt9OcYYB8YijP/POMKvruPNfQvxW+Mfws+B3hSXxv8XNes/D+lxcGe7kCbm/uov3nY9lQMx7Cvyk/b1/4LB/Db9nCW8+F/wADFt/FvjSMNHNMH3adp0g4xKynM0q94kICn7zAjaf5S/jZ8fPi/wDtFeM5vH3xl1651zUZS2wzt+6hVjnZDGMJEn+yiqO/WvkMn4MzHOJ/XcxqOMZa3espeiey7N/JNHrYvOMPhI+xw8U2u2y/r+mf0L/tKf8ABfPR9PmuPDv7K/hr7ewyo1jWw0cWf70dqhDsO4MjoeOUNfh18bv25v2sf2hpZl+KPjjUrqzmJzYW0n2SywegMEGyNsDgFlLep5NfJ1Ffq2V8MZbl6X1eiub+Z6y+97fKyPl8TmeJrv356dlogooor3zgCiiigArV0TXtc8NanFrXhy9n0+8gO6Oe2kaKVD6qykEfgayqKTSaswTtqj9SfgF/wWD/AG0vgjLBY61rq+NtJjwDaa8puJdvfbcgrPux0Lu6j+6ec/v1+y1/wWV/Zd+P8tt4Z8fyN4A8Qz7UEGpyBrGRzgYjuwFUcnjzVjz2zX8XlFfJ5twVleOTfs+Sf80dPvWz+6/merhc5xNB25uZdnr+O5/pXMtjqliVYJcW1wmCDh0kRx+IIIP0Ir8Mv25P+CLPw1+MEd58R/2YRb+EvE7b5pdLI2aZetjOEUcWzk9Cg8snqq5LV+H/AOxf/wAFOv2g/wBj+9tvD8N03ibwYrr5uiX8hKxp3+yykM0B9gDGTyUJ5r+vH9lX9sX4I/theB18YfCXUg1zCq/b9LuMJe2Tt/DLGCflJ+66ko3Y5BA/LcblGccM1/rOHnen/Mtn5Tj0/Ls7n01HF4TMoezqL3uz3+T/AK80fwTfEj4Z+P8A4QeMrz4ffE7SbnRNZ09tk9rdJsdfQjsysOVZSVYcgkVw1f3xftqfsLfB/wDbX8CjQvG0X2DXrFG/svWoEBuLVjztbp5kLH70bHHdSrYYfxQ/tM/syfFf9k74o3Xwr+LNl5F1F+8tbmPLW15bkkLNC5A3KcYI4ZTlWAIIr9R4Y4tw+bQ5H7tZbx7+ce6/Ffi/mszyqphZcy1h0f8AmfPdFFFfXHkhRRRQAUUUUAFFFFAH/9P+H+iiivLOgKKKKACiiigAr9bf+CW//BOnUv2uvHI+JHxJt5IPh3oM4Fwxyh1K5TB+zRkYOwZBmcHIBCj5myvxr+x1+y34w/a++O2k/B/wsHht5j9o1O9Vdy2djGR5spzxnkKgP3nZR3zX96fwo+Fvgn4J/DnR/hV8ObMWGi6HbrbWsI5O1eSzHqzuxLOx5ZiSeTX59xzxS8vo/VMM/wB9Nb/yx7+r6dt+x72SZZ9Yn7WovcX4v/Ludfpum6P4c0eDSNJgisbCxhWKGGJRHFDFEMKqqMBVVRgAcACv5iv+CnP/AAV0vfEsupfs8fsp6gYNMUtbat4it2xJc9nhtGH3YuzSjl+iELy/X/8ABYn/AIKS3Vrcal+x78C70xMmYPE+pQthsn71lEw6f9N2H/XP++K/mgrxeCODIuMcyzCN29YRf/pT/RfN9Lduc5w03h8O/V/ov1Ciiiv1s+UCiiigAooooAKKKKACiiigAooooAK9R+Dfxn+JXwA+IVh8UfhNqkukazp7ZSWM5V0ON0ciH5XjfGGRgQa8uoqKlOFSDhUV4vRp7NFRk4tSi7M/ub/4J9f8FEvh/wDtt+D20+5WLRfHGlxBtS0nd8rrwDPbFuWiJ6g5aMnDZBVm+tf2nf8Agnb4Q/b1+Dkvgfx8V0qWMtNpGriPzLiyuCMb0XKlo2wBIhYBwOoIVh/Cx+w1qPiTT/2yfhdF4U1OXR7u+8U6TYfaojgpFeXMcMgPYqyOQynhlJB4r/UUiijgiWGIbVQBQB2A6V+DcVZNHJMxp18DNxT96K6xae1+q/TR+f3OV4t43DyhXV7aPzP4kP2iP+Dav9oz4ZeDLrxZ8D/GVj8QbizjaV9NNm2mXcoUEkQhpp43bjhS6kngc1/N/qml6lompXGjaxBJa3dpI8M8MqlJI5IyVZWU8hlIIIPINf62VfwE/wDBwv8ACnwp8Mv+Ch91qfhWFIP+Et0Gx1y8SMYH2uWSe3kY+7+QHPqWzX2HBfFuKx2Ilg8Y1J2bUrJbbppWXpoeRnOVUqFNVqOivZo/DWiiiv0w+bCiiigAooooA//U/h/oooryzoCiiigAoor9FP8Aglx+zJF+09+1xoeh67b+f4f8Og61qwYZR4bZl8uJux82YopGclNxHSuTHYynhMPUxNX4YJt/L/PZGtCjKrUjTju3Y/pO/wCCSX7HMP7MH7OVt4t8UWvl+L/G6RajqBdR5lvbEZt7bPUbUO9wefMcg/dFdB/wVI/baj/Y/wDgM9r4SuFXxr4qElnpCgjfbqB+9uyPSIEBM9ZGXggNX6WXt7Z6bZTajqMqQW9ujSSySMFREQZZmJ4AAGST0r+CD9vn9qbUv2uv2ldc+Jwkf+xIHNhokLZAi0+AkRnafutKSZXHZnI6AV+H8M5fUz/OJ43GK8Ivml2/ux9NPuVj7XMq8cDhI0aW70X6v+urPji7u7q/upb6+leaeZ2kkkkYs7uxyWYnkknkk9ar0UV+9nwoUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAbfhrxDq3hHxHp/ivQJTBf6XcxXdtKOqTQMHRh9GANf6LP8AwT0/4Kp/s8/ttfDLS/tWt2eg+PYYUi1XQ7yZYZTcKAGkt920SxSHldmWXOCARz/nF0V85xFw3QzalGNSTjOO0lrvumuqPRy/Mp4STcVdPdH+pd+0R+15+zn+yt4MuvG/xw8V2Oj29vG0iW5lV7u4IBISGBSZJGbGBgYz1IHNf5z/AO39+15rX7cH7UniL4/albNYWd6yWumWbkM1vYW42woxAALEZZ8cbmNfGNFcnDfCNDKZSqqbnUate1rLyV3v11NcxzaeKSha0V03CiiivrjyQooooAKKKKAP/9X+H+iiivLOgKKKKACv69/+CE/wHj8Afsx6j8aNSh26h45v2MLlcN9gsC0UY555l85vQjb7V/Iha2txfXUdlZoZJZmCIijJZmOAB7k1/oq/AT4Y2fwX+CXhP4TWKqq+HtJtLFivRpIY1WR/q75Y+5r828TMwdLAU8LF61Ja+kdfzaPouG8PzV5VX9lfi/8AgXPz4/4LJ/tETfA79j6/8L6HceTrHjub+xYdpw62rqWunHt5Q8o+8or+Kmv24/4Lu/GJ/G/7V+nfCq0l3WngnSo0dM523moYnkPtmHyB+FfiPXr8CZasJlNOTXvVPffz2/8AJbfecueYj2uLkukdP8/xCiiivsjxwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//W/h/oooryzoCiiigD6r/Ya8DR/Ej9sP4a+ELhPMhn8QWMsydd0NtIJpB+KIRX+gbX8RP/AARv0KPWf+Cg/gy4lG5dPg1O6wfUWUyD8i4Nf2wa/qsehaFe63KMpZwSTsPaNSx/lX4f4nVXPMaNFdIX+bk/8kfa8NQSw8593+SR/n8fto/ECT4pftZ/EXxyX8yO91++WBs5/wBHhlaKH8o0UV8yVZvLu4v7uW+u2LyzO0jsepZjkn8TVav2rDUVRpQox2ikvuVj42pNzm5vq7hRRRWxAUUV6r8DfhNr/wAdvjD4b+D3hgH7b4iv4bJXxkRrI3zyEf3Y03O3spqKtSNOEqk3ZJXb8kVGLk1Fbs+nf2Kv+Cevxw/bX1xpvB8a6R4Xs5vKv9du1JgiYAExxICGml2kHYpAGRvZQQT+3fjX/gnD/wAEu/2GfhmPGf7Vt9qHiOS5Jig+13U0MtxOoyUtbaxaJvTJd3VcjcwBBr9wfg/8JPAfwJ+G2k/Cf4aWS2GjaNAIIIhyx7s7n+J3YlnY8sxJr+Gr/goJ+0/rn7Vn7TniHx1cXLvotjcSafosG8tHFY27FUZR0BmIMr4/ibHQCvyrLs2zDiPMJ06NWVHDQ1fLpJ66Xlvd6+SS6vU+oxGFoZdQUpxU6j76rz07I+xbf9oD/gixJrotbj4EeI49OJA+0DVrppQM9TF/aIH5SGv0W0f/AIJd/wDBNj9tT4ZR/EX9kjWL7w9ECYTJZ3Et2kU4AJS5t71nmVgCDtEkeRggkEE/yl1+kH/BLL9p/XP2bf2svD8JuWXw94uuYdF1aAuREVuXCQzEdN0EjBt2M7N6jG419FnOQ4qjhpYjLsVVVSCvaU5SUrbpqV1ft08u3nYPHUp1FTxFKLi9LqKTX3Hlv7Yn7Cvxx/Ys8Ux6X8SbVbvRr6Rk07WbTLWl1t5288xygcmN8HglSy/NXzr8LvFHgfwj4si1f4ieGIvF2lBCkuny3U9lnOMMssDKysMYGQy88qeMf6BP7Q/wF8A/tL/CLWPg78RrZZ7DVIiEkxmS2nUfup4z2eNuR6jIOVJB/wA+P4h+BfEPwv8AHus/DjxbD5Gp6Dez2F0nYS27lGx6gkZB7jmlwhxL/bOGnSxCtVjvZtXT6q2qfe2z23snm2XfU6kZ0/he19beR/Xv8IP+CXP/AATa+OPwl8MfF3wz4JuLay8RaVa36RDWLyRkM8YdkdhcMPMQko4GAGUjAr46/ac+E3/BFv8AZY+K8Xwe+KXgrXoNTSzguZJLG6vZ4Ak27azM13u3YGSEXHTAzmv1v/4Jo/8AJh/wx/7A6/8Aox6/mv8A+C4v/J9N1/2A9O/k9fFcPTxeNzmtgK2Lq8kee1qkr+7Ky6s9nMI0qODhXhSjzO32V1R+pvgb/glb/wAEyv2sPhmPiJ+zrqmqQWF1uijubC+eQ286gEpNDdK7q65BZG2kqQQcEGvw9/b0/wCCdnxO/Yc8Q2dxqV1/wkPhTVWKWWswwmFfOGSYJk3P5cu0bl+Yq65KnIYL+in/AAb4+LfEEPxO+IXgRWkbSrjS7a/ZckxpcQy+WpA6BnWRsnuF56Cv11/4K4aHout/8E/PH760qn7FHZXNu7DlJ0u4QpX0LZKfRiK7YZ1mGU5/HLald1aUpRXvau0rWd97q/o+2umLwdDFYF4iMFGaTem2n+f4H8NNFFFfr58kFFFFABRRRQAUUUUAFFFFABRRRQB//9f+H+iiivLOgKKKKAP1z/4IjeX/AMN5aXv6/wBkalt+vlj+ma/sA+L/AJn/AAqXxR5X3v7IvcfXyXr+M7/gjdrsejf8FBvBlvK21dQg1O1z7mymcD8SgH1r+2DX9Kj13Qr3RJThLyCSBj7SKVP86/CvEf3M5pze3JF/+TSPt+HtcHJLu/yR/mu0VZvLS4sLuWxu1KSwu0bqeoZTgj8DVav3U+ICiiigAr9XP+CLGhW2r/t++HL6cgNplhqd1GD3ZrZ4ePfEpP4V+Udffv8AwS8+Kmj/AAf/AG6PAPifxFN5Gn3d1Lpczk4CnUIXt4yx6BRK6FiegBNeRxBTnUyzFQp7uErf+AvT5nXgJKOJpSltzL8z+2v436vdaB8FvF+vWRYTWWiahcRleG3RwOwx75Ff5y9f6THi3w9beLfCup+FLxikOp2k1o7AZIWZChOPoa/zifF/hfV/A/izVPBfiCPyr/SLueyuUP8ADNbuUcfgymvzvwrqR5MVD7V4v5e8fQcTxd6Uumv6HO1Pa3NxZXMd5aOY5YWDo6nBVlOQQfUGoK9K+DPw51H4v/Fvwz8LNJBNx4i1S005Sozt+0SKhb6KCWJ7AZr9YqTjCDnPZK79D5aMW2ktz/Re0m9OpaVbaiylDcRJJtPUbwDj9a/ht/4KzaFbeHv+Cg/xGs7QgpNcWV0cdmubK3lbPvuY1/dAiJGgRAAqjAA6ACv8/wD/AG8Pipo/xr/bB+IPxJ8Oy/aNPvtWkitZuokgtVW3jcf7LLGGX2Ir8T8MKcnmFeol7qhb5uSt+TPsuJZJYeEXvf8AR/5o/sc/4Jo/8mH/AAx/7A6/+jHr8V/+CkH7Hfxh/bB/4KFav4Z+D7aYbrT9B0t51v76K2cJIJfnWMkyyKu35iiMFyM4yK/aj/gmj/yYf8Mf+wOv/ox6/nr/AOCuvxJ8W/B7/gpbp/xQ8C3LWmr6Fp2lXltIpI+ePedrY6owyrr0ZSQeDUcNRrviDGLDSSqWq2bV1fnW6uisycFgKXtFePu3t6H7kf8ABOz9hfQv2APhNq97441e0u/EWuGO41nUFby7OCG3DeXFG8m07E3uzOwUsW5AAFflF/wWN/4KMfDb4ueD4f2YPgHqket2D3Ud1rmp2x3Wrm3OYreJ+kg3gSO65XKoFJ+bH9F/wl+I3gb9pL4JaL8SNIiivtD8V6ckzW86rKm2ZdssEikFWKNujcEYyCK/kc/4Kx/sCW/7JXxNg+IvwztmXwH4rlc28YGV0+85Z7bPPyMMvDnnaGXnZknCU6ONzydbNZP6yneKdkuZaW9Y291baeWpmqnRwShhV+7tr3s/8+p+RVFFFfuR8SFFFFABRRRQAUUUUAFFFFABRRRQB//Q/h/oooryzoCiiigD6r/Ya8cx/Df9sP4a+L7h/Lhg8QWMUz9NsNzIIZD+COTX+gbX+afa3VxY3Ud7ZuY5YWDo6nBVlOQR7g1/oq/AT4nWfxo+CXhP4s2LKy+IdJtL5gvRZJo1aRPqj5U+4r8e8UsI+fDYpbWcX+a/Nn13DFXSpS9H+n+R/B7+2j8P5Phb+1n8RfAxTy47LX75oFxj/R5pWlh/ON1NfMlftx/wXd+Dr+CP2r9O+KtpFttPG2lRu74xuvNPxBIPfEPkH8a/Eev0rIMasXl2HxCe8Vf1Wj/FM+cx1H2WIqU+zf3dPwCiiivXOQKfFLJBIs0LFHQhlZTggjoQaZRQB/ZD/wAEzv8AgqF4J/aO8H6Z8IvjXqsOm/Ee0UWyNcERR6uqgBZImOF88jiSLgs2WQYJC/KH/BWL/glr4++IPju8/ac/Zr05tWutTAfXNFtwBOZkUD7TbrkeYXAHmRrly/zKG3Nt/mQjkkikWWJirKQQQcEEdxX3p8IP+CnX7b/wU09dF8LeOru+sEAVbfVlTUVQDoFa4V5EA6BVcD2r8+nwhiMDjnmGS1IxvvCV+Vp7pNbLsraPrbQ99ZtTr0PYYyLdtpLf8T5bg+BnxsutbHhq28H63JqJbaLVdPnM2emNmzdn8K/pd/4JK/8ABMLxl8DvEq/tLftE2YsPECQyQ6NpDlXktFmXa9xMVJCyshKImcorMW+YgL+bUn/Bcz9uV9P+xLJoCyf8/A08+Z+RkKf+OV8r/Gb/AIKR/tp/HeybSPG/jq9g091KtaaYE06F1PUOLdYzID6OWFdeaYTPsxoPCNU6MJaSak5NrsvdWj6/mY4argcPNVfem1srJL82fvz/AMFS/wDgqP4O+FfgvVP2f/2fNXi1LxnqIey1G9tW8yLS4GBWQCQZU3JHyAKSYuS2GCiv5I6K9G+FvxW8afBrxYnjfwDJaRalEhjSS8sbbUEUMQcrHdxTRhgQMOF3DsRk16+R5DRyjCujhVzSerb05n5tJ2XbR283c5cbjp4urz1dF0S6I/uu/wCCfXhbWPBv7E/wx0HXo/KuhoFrOycgqLlfOVWBAIYK4DDHByK/mt/4LteGdW0f9tK1128T/RdX8PWUtvIAdp8qSaJ1JIA3ArkgE4VlJ614X/w+D/4KL/8ARRP/ACkaZ/8AIleX/Fv/AIKM/tg/HfwnP4H+L3ia017TbhHjMdzo2mb0EgwxikW1EkTY/jjZWHY18lkXCmaYHNZ5hUdNqfNdKUr+876e50+R6uOzTDV8KsPFSTVraLp8z9Ov+CKX7efhr4Zy3P7Kfxh1JLDTNTuTdaBeXLhIYbqXAltmYnCiU4ePOB5m4dXFf0c/tA/AvwH+0r8IdZ+DnxFg87TdYh2eYuPMglXmOaMno8bAMvY4wcgkV/nXV9Y/Cj9ur9rz4I6NF4c+Gfj/AFXT9Og/1Vo8guYIwOyRziRUHsoA9q24h4FnisZ/aGX1VTqNptO9uZfaTWqffR66kYDO1So+wrx5o7fLsc/+1L+yz8VP2SPipefC/wCJ1oymNmaxv0Ui2vrfPyywseCCMblzlG+VuRXzdX3z47/4Keftt/E/w5N4R+Ini211rTZ0aN4LvRNKlXDqVJBNplWweGUhh1BzXwNX2+XfXfYpY5R511i20/Oziremp4uI9jzt0L8vmlp9zdwooorvMAooooAKKKKACiiigAooooA//9H+H+iiivLOgKKKKACv69/+CE/x5j8f/sx6j8F9Sm3ah4Gv2EKFssbC/LSxnnniXzl9ANtfyEV+in/BLj9puL9mH9rjQ9c1248jw/4iB0XVixwiQ3LL5crdh5UwRicZCbgOtfL8Y5U8fldWnBXnH3o+q6fNXXzPTyjFewxMZPZ6P5/8E/pC/wCCyf7O83xx/Y+v/FGh2/nax4Em/tqHaMu1qilbpB7eUfNPvEK/ipr/AErr2ys9SsptO1GJJ7e4Ro5Y5FDI6OMMrA8EEHBB61/BB+3z+yzqX7Iv7SuufDERv/Yk7m/0SZskS6fOSYxuP3miIMTnuyE9CK+P8Ms5UqdTLaj1XvR9H8S+T1+b7HrcSYRqUcRHZ6P9D4wooor9YPlgooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/9L+H+iiivLOgKKKKACiiigD+2L/AIJJftjQ/tP/ALOVt4S8UXXmeL/BCRadqAdh5lxbAYt7nHU7kGxyefMQk/eFdB/wVI/Ylj/bA+Az3XhK3VvGvhUSXmkMAN9wpH720J9JQAUz0kVeQC1fyQfsdftR+MP2QfjtpPxg8LF5reFvs+p2Qbat5YyEebEc8Z4DIT911U9sV/en8KPil4J+Nnw50f4q/Dm8F/ouuW63NrMODtbgqw6q6MCrqeVYEHkV+EcU5XXyLNIZjg9ISd49k+sX5PW3k7dD7jLMTDHYV4etulZ+nR/11P8AORu7S6sLqWxvonhnhdo5I5FKujqcFWB5BB4IPSq9f0v/APBYn/gm1dXVzqX7YPwLsjKz5n8T6ZCuWyPvXsSjr6zqP+un981/NBX6/kedUMzwscTQfqusX1T/AE7rU+SxuDnhqrpz+T7oKKKK9g5AooooAKKKKACiiigAooooAKKKKACiiigDb8NeHtW8XeI9P8KaBEZ7/VLmK0toh1eadgiKPqxAr/RZ/wCCen/BKz9nn9iX4ZaX9q0Sz17x7NCkuq65eQrNKLhgC0dvu3CKKM8LswzYySSeP4NP2GtO8Sah+2T8LpfCmmS6xd2PinSb/wCyxDJeKzuY5pCewVUQlmPCqCTxX+opFLHPEs0R3K4DAjuD0r8r8SMyr0/Y4SnO0ZJuST1fRX8t/J/I+p4cw0Jc9WSu1oj5w/aI/ZD/AGc/2qfBl14I+OHhSx1i3uI2jS4MSpd25IIDwzqBJGy5yMHGeoI4r/Of/b+/ZD1r9h/9qTxF8AdSuWv7OyZLrTLxwFa4sLgboXYAkBgMq+ONymv9PKv4Cf8Ag4X+K3hT4m/8FD7rTPCsyT/8IloNjod48ZyPtcUk9xIp9088IfQrivM8OcdifrksKm3TcW2uiaas127efyOniGhT9iqtvev95+GtFFFfs58aFFFFABRRRQB//9P+H+iiivLOgKKKKACiiigAr9bf+CW//BRbUv2RPHI+G/xJuJJ/h3r04Nwpy5025fA+0xjk7DwJkAyQAw+ZcN+SVFcOZZdQx2HnhcRG8Zfh2a810N8PiJ0KiqU3qj/Sm03UtI8R6PBq+kTxX1hfQrLDNEwkimikAKsrDIZWU5BGQQa/mJ/4Kc/8Ei73w1LqX7Q/7KenmfTGLXOreHbdcyW3d5rRR96Lu0Q5TqgK8J8w/wDBNf8A4KoeI/2U7i3+EPxjafV/h7NJiJlzJcaSznJeIdXhJOXiHIOWTnKv/YB4N8Z+FPiH4WsfG/gbUINV0jU4lntbu2cSRSxt0KsPyI6gjB5FfhlahmfCmP8AaQd6cuv2Zrs+0l966XR9rCeGzShyy0kvvT/yP822iv7E/wBvX/gj58Nv2j5bz4ofAxrfwl40kDSTQhNunajIecyqozDK3eVAQx+8pJ3D+Uv42fAP4v8A7OvjObwD8ZdBudD1GItsE6/uplU43wyDKSp/tIzDt1r9fyHifBZrTvRlafWD3X+a8187M+Tx2W1sLL31ePfp/wAA8gooor6I88KKKKACiiigAooooAKKKKACvUfg38GPiV8f/iFYfC74TaXLq+s6g2EijGFRBjdJI5+VI0zlnYgCvtD9i/8A4Ji/tB/tgXtt4ghtW8M+DGdfN1u/jIWRO/2WIlWnPuCIweC4PFf14/sq/sd/BH9j3wOvg/4S6aFuZlX7fqlxh729df4pZAB8oP3UUBF7DJJPxHEvG2Fy2MqNFqdbsto/4n+m/pue1l2TVcQ1Ofuw79X6f5nhH/BPr/gnb8P/ANiTwe2oXLRa1441SILqWrbflReCYLYNysQPUnDSEZbACqv1r+07/wAFEvCH7BXwcl8cePguqyyFodI0gSeXcXtwBnYjYYrGuQZHKkID0JKqfEf21P26fg/+xR4FGu+Npft+vXyN/ZeiwOBcXTDjc3Xy4VP3pGGOyhmwp/ih/aZ/ab+K/wC1j8Ubr4qfFm98+6l/d2ttHlbaztwSVhhQk7VGck8sxyzEkk18Bw9w9jc+xTzHMJP2Ter2cv7sey6XW2y1297H5hRwNL6vh173bt5vzP3K/aI/4OVP2jPib4MuvCfwP8G2Pw+uLyNon1I3jandxBgQTCWhgjRueGKMQeRzX83+qapqWt6lcazrE8l1d3cjzTzSsXkkkkJZmZjyWYkkk8k1Ror9ky3J8HgIuGEpqKe+7b9W7v8AE+QxOLrV2nVlcKKKK9I5gooooAKKKKAP/9T+H+iiivLOgKKKKACiiigAooooAK+7P2Lv+Cg3xy/Yr8RbvB8/9r+Gbl917oN5IwtpSerxEZMMv+2oIPG5WAAr4TormxeDoYqlKhiIKUHun/X47mlKtOlJTpuzR/fT+yV+3n+z3+2NoK3Pw11QWutxIGu9EvSIr6A4yxCZxLGP+ekZZfXaeK+hPit8HPhZ8cfCkvgf4uaDZ+INLm5MF3GH2t/eRvvI47MhVh2Nf50+h67rnhjV7fxB4avJ9Pv7RxJBc20jQzROOjI6kMpHqCDX7i/sr/8ABc741/DOO38K/tHaePHGkx4QahCVt9UjUd2PEU+BgDcEc9WkJr8iznw6xOHn9Yymd0tVFu0l6S6/g/U+swfEFOa9nilbz6P1X/Dn05+0p/wQM0jUJrjxF+yv4m+wMcsNH1stJFn+7HdIC6jsBIjnnlxX4dfG79hn9rH9nmWZvij4H1K1s4Sc39tH9rssDoTPBvjXI5AZg3qODX9m/wCz7/wUG/ZJ/aWjgtvhx4vtYtUmA/4lWon7HfBj/CI5MCQ+8Rce9faFcGE46znLZewx9Pnt0mnGX3219Wn6m9XJMHiF7ShK3pqvu/4Y/wA0eiv9CT4l/sc/srfGCSS5+I/w/wBD1O5lzvuWs447k5/6bRhZf/Hq+MvFX/BFX9gfxHI0umaBqOiF+cWOpTkA+wuGmx/Kvq8N4n5fNfv6U4vytJffdP8AA8upw1XXwST+9fp+p/FRRX9fl1/wQM/Y1uJC8OveL4B/dS9tCP8Ax6yY1q6T/wAEHf2KdOkD3moeKL8D+Ge+gUH/AL9W0Z/Wu5+I+TpXvL/wH/gmH+r2L7L7z+O6tbRNB1zxNqcWi+HLKfULyc7Y4LaNpZXPoqqCT+Ar+4DwT/wSR/YC8DyJcweA49TnT/lpqV3c3QOPWN5fK/8AHK+4/AXwp+F/wssP7L+GXhzTPD1uQFMem2kVqpA9RGq5/GvKxfijhIr/AGahKT/vNRX4cx1UuGar/iTS9Nf8j+M/4Bf8Eff20vjdLBfazoS+CdJkwWu9eY28u3vttgGn3Y6B0QH+8Ocfv1+y1/wRq/Zd+AEtt4m8fxt4/wDEMG1xPqcYWxjcYOY7QFlPI481pMdsV+ruv+IvD/hTSZtf8UX1vptjbjdLc3Uqwwxj1Z3IUD6mvyT/AGkf+C1P7KHwYhn0n4ZTSfELW0BCx6afLsVfnG+7cFSPeFZRXytfiTiDPJOhhItRfSCaX/b0nt96XkepDL8Bglz1Xd/3v0X/AAGfr0zWWl2RZilvbW6ZJOESNEH4AAAfQCvwy/bk/wCC03w1+D8d58OP2YTb+LfE674ZdUJ36ZZNjGUYcXLg9Ah8sHqzYK1+DP7V/wDwUm/ag/a3ebR/GGrf2N4akJ26JpW6C1K84845Mk5xjPmMUyMqq18CV9Nw/wCHEKbVfM5cz/kW3/bz6+i082jzcfxDKScMMrLu9/l2O5+JHxM8f/F/xlefEH4natc63rOoNvnurp97t6AdlVRwqqAqjgACuGoor9ThCMIqEFZLZI+Ybbd29QoooqhBRRRQAUUUUAFFFFAH/9X+H+iiivLOgKKKKACiiigAooooAKKKKACiiigAr7B+D37ff7YfwISK0+HPj7VIbOHAWzu3F9aqo/hWK5EiKD/sgH05r4+orDEYWjiIcleClHs0mvxNKdWdN80JNPy0P3i+Hn/Bfn9pLQY0tviP4U0LxCidZLfzrCdvqQ0sefpGPpX1v4a/4OE/hfdRqfGPw31Sxb+IWd9DdgfQukGfyr+WaivmsRwPktZ3eHs/JyX4J2/A9GnnWMhp7S/qkz+uu2/4L+/sivHm88L+L429EtbJx+ZvV/lWZqn/AAcBfsuxRk6L4Q8U3DdhPFaQj81uZP5V/JPRXEvDvJr35Jf+BM2/1gxndfcf0w+Mf+DhiARtD8P/AIYMWP3ZtQ1PAH1ijgOf+/gr4h+J/wDwW/8A23PHcctp4UuNJ8IQPlQdMsxLNtPq900/PuqqfTBr8fKK9LC8G5NQd4YZN/3ry/8ASm0c1XN8ZU0dR/LT8j1L4n/G/wCMPxq1P+2Pi34n1PxHOp3IdQuZJ1jz/cViVQeygCvLaKK+kp04U4qEEkl0WiPPlJyd5O7CiiirJCiiigAooooAKKKKACiiigAooooA/9b+H+iiivLOgKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/2Q==" alt="CHAOSOR">
+    <div class="nav-brand">CHAOSOR <span>Pte. Ltd.</span></div>
   </div>
-  <div class="orb" style="width:250px;height:250px;background:radial-gradient(circle,rgba(139,94,26,.26),transparent 70%);top:30%;left:8%"></div>
-  <div class="orb" style="width:180px;height:180px;background:radial-gradient(circle,rgba(42,107,107,.14),transparent 70%);bottom:16%;right:4%"></div>
-
-  <div class="h-eye a1">集团品牌手册 · GROUP BRAND IDENTITY</div>
-
-  <div class="h-logo-wrap a2">
-    <div class="h-logo">CHAOSOR</div>
+  <div class="nav-links">
+    <a href="#story">品牌 · Brand</a>
+    <a href="#services">咨询 · Consulting</a>
+    <a href="#trade">贸易 · Trade</a>
+    <a href="#brands">集团 · Group</a>
+    <a href="#contact">联系 · Contact</a>
   </div>
+  <a href="#contact" class="nav-cta">联系我们</a>
+</nav>
 
-  <div class="dv a3"><div class="dvl"></div><div class="dvd"></div><div class="dvl r"></div></div>
-  <div class="h-tagline a4">混沌中的黄金 · 从无序中创造价值</div>
-  <div class="h-sub a5">CHAOS · ORIGIN · GOLD · POWER</div>
-
-  <div class="scroll-hint">
-    <div class="sh-line"></div>
-    <div class="sh-txt">向上滑动</div>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">新加坡 · Pte. Ltd. · Est. 2025</div>
+    <div class="hero-title">CHAOSOR</div>
+    <div class="hero-sub">"Where Chaos Becomes Gold"</div>
+    <div class="hero-sub-zh">混沌之中，黄金所在</div>
+    <div class="hero-sep"></div>
+    <p class="hero-desc-en">A Singapore-based consultancy and trading group — connecting ambitious individuals and enterprises with global opportunity across Europe, North America, Japan and beyond.</p>
+    <p class="hero-desc-zh">新加坡综合咨询与贸易集团，连接雄心勃勃的个人与企业，助力开拓欧洲、北美、日本等全球发达市场的无限机遇。</p>
+    <div class="hero-btns">
+      <a href="#services" class="btn-solid">了解服务 · Our Services</a>
+      <a href="#story" class="btn-ghost">品牌故事 · Our Story</a>
+    </div>
   </div>
-</div>
-
-<!-- ════════ S2: CHAOS SYMBOL ════════ -->
-<div class="slide" id="s2">
-  <div class="orb" style="width:320px;height:320px;background:radial-gradient(circle,rgba(139,94,26,.1),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)"></div>
-  <div class="tag a1">品牌符号 · THE SYMBOL OF CHAOS</div>
-  <div class="sec-title a2" style="text-align:center">THE<br><em>CHAOS ORIGIN</em></div>
-
-  <div class="sym-wrap asc">
-    <svg class="sym-r-out" style="position:absolute;inset:-24px;width:calc(100% + 48px);height:calc(100% + 48px)" viewBox="0 0 248 248" fill="none">
-      <circle cx="124" cy="124" r="119" stroke="rgba(200,168,75,.14)" stroke-width="1" stroke-dasharray="7 12"/>
-    </svg>
-    <svg class="sym-r-mid" style="position:absolute;inset:-6px;width:calc(100% + 12px);height:calc(100% + 12px)" viewBox="0 0 212 212" fill="none">
-      <circle cx="106" cy="106" r="102" stroke="rgba(200,168,75,.1)" stroke-width=".8" stroke-dasharray="3 9"/>
-    </svg>
-    <svg class="sym-core" viewBox="0 0 200 200" fill="none" style="position:absolute;inset:0;width:100%;height:100%">
-      <circle cx="100" cy="100" r="88" stroke="rgba(200,168,75,.07)" stroke-width=".6"/>
-      <circle cx="100" cy="100" r="62" stroke="rgba(200,168,75,.06)" stroke-width=".5" stroke-dasharray="3 8"/>
-      <circle cx="100" cy="100" r="36" stroke="rgba(200,168,75,.05)" stroke-width=".5"/>
-      <g stroke="#C8A84B" stroke-width="1.3" stroke-linecap="round" opacity=".88">
-        <line x1="100" y1="100" x2="100" y2="11"/><line x1="100" y1="11" x2="93" y2="27"/><line x1="100" y1="11" x2="107" y2="27"/>
-        <line x1="100" y1="100" x2="100" y2="189"/><line x1="100" y1="189" x2="93" y2="173"/><line x1="100" y1="189" x2="107" y2="173"/>
-        <line x1="100" y1="100" x2="11"  y2="100"/><line x1="11"  y1="100" x2="27"  y2="93"/><line x1="11"  y1="100" x2="27"  y2="107"/>
-        <line x1="100" y1="100" x2="189" y2="100"/><line x1="189" y1="100" x2="173" y2="93"/><line x1="189" y1="100" x2="173" y2="107"/>
-        <line x1="100" y1="100" x2="163" y2="37"/><line x1="163" y1="37" x2="151" y2="44"/><line x1="163" y1="37" x2="156" y2="53"/>
-        <line x1="100" y1="100" x2="37"  y2="163"/><line x1="37"  y1="163" x2="49"  y2="156"/><line x1="37"  y1="163" x2="44"  y2="147"/>
-        <line x1="100" y1="100" x2="37"  y2="37"/><line x1="37"  y1="37"  x2="49"  y2="44"/><line x1="37"  y1="37"  x2="44"  y2="53"/>
-        <line x1="100" y1="100" x2="163" y2="163"/><line x1="163" y1="163" x2="151" y2="156"/><line x1="163" y1="163" x2="156" y2="147"/>
-      </g>
-      <circle cx="100" cy="100" r="13" fill="rgba(200,168,75,.07)"/>
-      <circle cx="100" cy="100" r="7"  fill="rgba(200,168,75,.65)"/>
-      <circle cx="100" cy="100" r="3"  fill="#E8C870"/>
-    </svg>
-    <div class="sym-glow"></div>
-    <div class="sym-label">混沌<br>之源</div>
+  <div class="hero-right">
+    <div class="hero-svc-list">
+      <div class="hero-svc">
+        <div class="hs-num">01</div>
+        <div class="hs-en">Management Consultancy</div>
+        <div class="hs-zh">管理咨询 · 战略顾问</div>
+        <div class="hs-sep"></div>
+        <div class="hs-desc">跨境企业战略、市场准入、全球业务拓展</div>
+      </div>
+      <div class="hero-svc">
+        <div class="hs-num">02</div>
+        <div class="hs-en">Global Mobility</div>
+        <div class="hs-zh">移民 · 留学 · 出国务工</div>
+        <div class="hs-sep"></div>
+        <div class="hs-desc">全流程移民、留学申请、海外就业服务</div>
+      </div>
+      <div class="hero-svc">
+        <div class="hs-num">03</div>
+        <div class="hs-en">International Trade</div>
+        <div class="hs-zh">国际贸易 · 全球分销</div>
+        <div class="hs-sep"></div>
+        <div class="hs-desc">优质商品全球供应链采购与分销</div>
+      </div>
+      <div class="hero-svc">
+        <div class="hs-num">04</div>
+        <div class="hs-en">Investment Advisory</div>
+        <div class="hs-zh">投资咨询 · 资产配置</div>
+        <div class="hs-sep"></div>
+        <div class="hs-desc">跨境投资策略、房地产、私募股权顾问</div>
+      </div>
+    </div>
   </div>
+</section>
 
-  <div class="sym-quote a3">
-    古希腊神话中，混沌是宇宙最初的状态<br>
-    万物从这片深邃的虚空中诞生<br>
-    <em>"In the beginning, there was Chaos"</em>
+<!-- BRAND STORY -->
+<section id="story" class="sec">
+  <div class="sec-inner">
+    <div class="sec-label rv">品牌起源 · Brand Origin</div>
+    <h2 class="sec-title-en rv">Two Roots, One Universe</h2>
+    <div class="sec-title-zh rv d1">两大词根，一个宇宙</div>
+
+    <div class="story-grid">
+      <div class="story-card rv d1">
+        <div class="sc-root">古希腊语 · Χάος · Greek Origin</div>
+        <div class="sc-word-en">CHAOS · 混沌</div>
+        <div class="sc-word-zh">宇宙万物的起源状态</div>
+        <div class="sc-sep"></div>
+        <p class="sc-desc-en">In Greek mythology, Chaos was the primordial state of the universe — the infinite void from which all things were born. The mother of all possibility, representing boundless creativity, disruption, and rebirth.</p>
+        <p class="sc-desc-zh">古希腊神话中，混沌是宇宙最初的状态，一切可能性的母体，代表无限的创造力、颠覆与重生的力量。道家称之为「混沌初开，乾坤始奠」。</p>
+      </div>
+      <div class="story-card rv d2">
+        <div class="sc-root">纹章学 · Heraldry · European Origin</div>
+        <div class="sc-word-en">OR · 黄金</div>
+        <div class="sc-word-zh">纹章学中最高贵的颜色</div>
+        <div class="sc-sep"></div>
+        <p class="sc-desc-en">In European heraldry, OR represents gold — the supreme symbol of wealth, wisdom, sovereignty and excellence. Only the most noble families bore OR in their coats of arms. The highest value, refined from chaos.</p>
+        <p class="sc-desc-zh">欧洲纹章学中代表黄金，是财富、智慧、王权与卓越的最高象征。只有最高贵的家族徽章才使用OR。从混沌中提炼出的最高价值。</p>
+      </div>
+    </div>
+    <div class="story-union rv d3">
+      <div class="union-formula">CHAOS <span>+</span> OR <span>=</span> <span style="font-size:1.15em">CHAOSOR</span></div>
+      <div class="union-zh">在最深的混沌与不确定中，找到并创造真正的价值</div>
+    </div>
+
+    <div class="sec-label rv" style="margin-top:72px">集团哲学 · Philosophy</div>
+    <h2 class="sec-title-en rv">Three Pillars of CHAOSOR</h2>
+    <div class="sec-title-zh rv d1">三大核心哲学</div>
+    <div class="phil-grid">
+      <div class="phil-card rv d1">
+        <div class="phil-num">01</div>
+        <div class="phil-en">CHAOS IS OPPORTUNITY</div>
+        <div class="phil-zh">混沌即机遇</div>
+        <div class="phil-sep"></div>
+        <p class="phil-body-en">Most people flee uncertainty. We enter it. The greatest opportunities hide in the deepest uncertainty — those willing to navigate chaos discover what others cannot see.</p>
+        <p class="phil-body-zh">大多数人逃避混沌与不确定，CHAOSOR却在混沌中寻找机遇。当市场恐惧时，我们进入；当秩序已定时，我们已经离开。</p>
+      </div>
+      <div class="phil-card rv d2">
+        <div class="phil-num">02</div>
+        <div class="phil-en">ORDER FROM WITHIN</div>
+        <div class="phil-zh">秩序源于内在</div>
+        <div class="phil-sep"></div>
+        <p class="phil-body-en">The external world is chaotic, but CHAOSOR operates with crystalline internal clarity. We wield extreme internal order to navigate external chaos with the deepest strategic insight.</p>
+        <p class="phil-body-zh">外部世界是混沌的，但CHAOSOR内部是清晰的。我们用极致的内部秩序去应对外部混沌，以最深刻的战略洞见驾驭最复杂的市场环境。</p>
+      </div>
+      <div class="phil-card rv d3">
+        <div class="phil-num">03</div>
+        <div class="phil-en">LONG-TERM THINKING</div>
+        <div class="phil-zh">长期主义者</div>
+        <div class="phil-sep"></div>
+        <p class="phil-body-en">Chaos is the universe's natural state; order is only temporary balance. We think in centuries, undisturbed by short-term fluctuations, accumulating unshakeable strength across time.</p>
+        <p class="phil-body-zh">混沌是宇宙的常态，秩序只是短暂的平衡。CHAOSOR以百年为单位思考，不被短期波动所扰，在时间的维度上积累不可撼动的力量。</p>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
-<!-- ════════ S3: NAME MEANING ════════ -->
-<div class="slide slide-long" id="s3">
-  <div class="tag a1 w100">品牌名解析 · NAME MEANING</div>
-  <div class="sec-title a2">TWO ROOTS,<br><em>ONE UNIVERSE</em></div>
-
-  <div class="mc cc a3">
-    <div class="grid-tex"></div>
-    <div class="mc-ghost">C</div>
-    <div class="mc-lang">古希腊语 · Χάος · Greek Origin</div>
-    <div class="mc-word">CHAOS · 混沌</div>
-    <div class="mc-body">宇宙万物的起源状态，无形无边的虚空。一切可能性的母体，代表无限的创造力、颠覆与重生的力量。道家称之为「混沌初开，乾坤始奠」。</div>
+<!-- SERVICES -->
+<section id="services" class="sec">
+  <div class="sec-inner">
+    <div class="sec-label rv">咨询板块 · 01 · Consulting Division</div>
+    <h2 class="sec-title-en rv">Management &amp; Advisory Services</h2>
+    <div class="sec-title-zh rv d1">管理咨询服务</div>
+    <div class="svc-intro rv d2">
+      <p class="svc-intro-en">We guide clients through complex global transitions — from corporate strategy to personal relocation. Deep expertise in immigration, investment, and international business development across Asia-Pacific and beyond.</p>
+      <p class="svc-intro-zh">我们为客户提供全方位的跨境顾问服务，涵盖企业战略、个人移民、海外留学及国际业务拓展。深耕亚太及全球市场，助您在复杂环境中找到清晰的方向与路径。</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card rv d1">
+        <span class="svc-icon">🛂</span>
+        <div class="svc-en">Immigration</div>
+        <div class="svc-zh">移民服务</div>
+        <div class="svc-sep"></div>
+        <p class="svc-desc-en">Visa advisory, residency planning and citizenship pathways to Singapore, UK, EU, Canada, Australia and more.</p>
+        <p class="svc-desc-zh">签证咨询、居留规划及新加坡、英国、欧盟、加拿大、澳大利亚等国家和地区的入籍路径规划。</p>
+      </div>
+      <div class="svc-card rv d2">
+        <span class="svc-icon">🎓</span>
+        <div class="svc-en">Study Abroad</div>
+        <div class="svc-zh">海外留学</div>
+        <div class="svc-sep"></div>
+        <p class="svc-desc-en">University placement, application support and pre-departure consulting for students targeting top global institutions.</p>
+        <p class="svc-desc-zh">大学申请、录取规划及出发前全流程咨询，助力学生进入全球顶尖学府。</p>
+      </div>
+      <div class="svc-card rv d3">
+        <span class="svc-icon">✈️</span>
+        <div class="svc-en">Overseas Work</div>
+        <div class="svc-zh">出国务工</div>
+        <div class="svc-sep"></div>
+        <p class="svc-desc-en">Work permit facilitation, employer matching and relocation support for professionals seeking opportunities abroad.</p>
+        <p class="svc-desc-zh">工签申请、雇主匹配及海外安置支持，助力专业人士顺利开启国际职业生涯。</p>
+      </div>
+      <div class="svc-card rv d1">
+        <span class="svc-icon">📈</span>
+        <div class="svc-en">Investment Advisory</div>
+        <div class="svc-zh">投资咨询</div>
+        <div class="svc-sep"></div>
+        <p class="svc-desc-en">Cross-border investment strategy, real estate, private equity and portfolio structuring for global markets.</p>
+        <p class="svc-desc-zh">跨境投资策略、房地产、私募股权及全球市场资产组合配置顾问服务。</p>
+      </div>
+      <div class="svc-card rv d2">
+        <span class="svc-icon">⚖️</span>
+        <div class="svc-en">Strategic Consulting</div>
+        <div class="svc-zh">战略咨询</div>
+        <div class="svc-sep"></div>
+        <p class="svc-desc-en">Market entry strategy, corporate restructuring and business development advisory across Asia-Pacific and beyond.</p>
+        <p class="svc-desc-zh">市场进入战略、企业重组及亚太区域乃至全球业务拓展顾问，助力企业穿越复杂市场。</p>
+      </div>
+      <div class="svc-card rv d3">
+        <span class="svc-icon">🏢</span>
+        <div class="svc-en">Company Setup</div>
+        <div class="svc-zh">公司注册</div>
+        <div class="svc-sep"></div>
+        <p class="svc-desc-en">Singapore and offshore incorporation, compliance, tax structuring and ongoing corporate secretarial services.</p>
+        <p class="svc-desc-zh">新加坡及离岸公司注册、合规管理、税务架构及持续性公司秘书服务，一站式企业落地方案。</p>
+      </div>
+    </div>
+    <div class="process rv d3">
+      <div class="proc"><div class="proc-n">01</div><div class="proc-en">Consultation</div><div class="proc-zh">免费初步评估</div></div>
+      <div class="proc"><div class="proc-n">02</div><div class="proc-en">Strategy</div><div class="proc-zh">定制化路径规划</div></div>
+      <div class="proc"><div class="proc-n">03</div><div class="proc-en">Execution</div><div class="proc-zh">全流程案例管理</div></div>
+      <div class="proc"><div class="proc-n">04</div><div class="proc-en">Settlement</div><div class="proc-zh">落地后续支持</div></div>
+    </div>
   </div>
+</section>
 
-  <div class="mc oc a4">
-    <div class="grid-tex"></div>
-    <div class="mc-ghost">O</div>
-    <div class="mc-lang">纹章学 · Heraldry · OR = Gold</div>
-    <div class="mc-word">OR · 黄金</div>
-    <div class="mc-body">欧洲纹章学中代表黄金，是财富、智慧、王权与卓越的最高象征。只有最高贵的家族徽章才使用OR。从混沌中提炼出的最高价值。</div>
-  </div>
-
-  <div class="mc-union a5">
-    <div class="mcu-t">CHAOS + OR = <span>混沌中的黄金</span></div>
-    <div class="mcu-s">在最深的混沌与不确定中<br>找到并创造真正的价值</div>
-  </div>
-</div>
-
-<!-- ════════ S4: PHILOSOPHY 01 ════════ -->
-<div class="slide phil" id="s4">
-  <div class="phil-ghost">01</div>
-  <div class="tag a1">集团哲学 · 01 / 03</div>
-  <div class="pn a2">01</div>
-  <div class="pe a3">CHAOS IS<br>OPPORTUNITY</div>
-  <div class="pz a3">混沌即机遇</div>
-  <div class="pl agrow"></div>
-  <div class="pb a4">大多数人逃避混沌与不确定，CHAOSOR 却在混沌中寻找机遇。我们相信，最大的机会藏在最深的不确定之中。敢于进入混沌，才能发现别人看不见的价值。</div>
-  <div class="pq a5"><div class="pqt">当市场恐惧时，我们进入；当秩序已定时，我们已经离开。</div></div>
-</div>
-
-<!-- ════════ S5: PHILOSOPHY 02 ════════ -->
-<div class="slide phil" id="s5">
-  <div class="phil-ghost">02</div>
-  <div class="tag a1">集团哲学 · 02 / 03</div>
-  <div class="pn a2">02</div>
-  <div class="pe a3">ORDER FROM<br>WITHIN</div>
-  <div class="pz a3">秩序源于内在</div>
-  <div class="pl agrow"></div>
-  <div class="pb a4">外部世界是混沌的，但 CHAOSOR 内部是清晰的。我们用极致的内部秩序去应对外部的混沌，以最深刻的战略洞见驾驭最复杂的市场环境。</div>
-  <div class="pq a5"><div class="pqt">混沌是我们的战场，不是我们的状态。</div></div>
-</div>
-
-<!-- ════════ S6: PHILOSOPHY 03 ════════ -->
-<div class="slide phil" id="s6">
-  <div class="phil-ghost">03</div>
-  <div class="tag a1">集团哲学 · 03 / 03</div>
-  <div class="pn a2">03</div>
-  <div class="pe a3">LONG-TERM<br>THINKING</div>
-  <div class="pz a3">长期主义者</div>
-  <div class="pl agrow"></div>
-  <div class="pb a4">混沌是宇宙的常态，秩序只是短暂的平衡。CHAOSOR 以百年为单位思考，不被短期波动所扰，在时间的维度上积累不可撼动的力量。</div>
-  <div class="pq a5"><div class="pqt">我们种下的种子，会在混沌中生长为参天大树。</div></div>
-</div>
-
-<!-- ════════ S7: BRAND ARCHITECTURE ════════ -->
-<div class="slide slide-long" id="s7">
-  <div class="tag a1 w100">品牌架构 · GROUP ECOSYSTEM</div>
-
-  <div class="arch-head a2">
-    <div class="grid-tex"></div>
-    <div class="arch-head-name">CHAOSOR</div>
-    <div class="arch-head-role">集团控股主体 · Holding Group</div>
-  </div>
-
-  <div class="arch-conn a3"><div class="arch-vl"></div><div class="arch-hl"></div></div>
-
-  <div class="bcards">
-    <div class="bc bs a4">
-      <div class="bc-bg">SOPHSTAR</div>
-      <div class="bc-top">
-        <div class="bc-icon">⭐</div>
-        <div>
-          <div class="bc-name">SOPHSTAR</div>
-          <span class="bc-tag">智慧之星 · 战略投资平台</span>
+<!-- TRADE -->
+<section id="trade" class="sec">
+  <div class="sec-inner">
+    <div class="sec-label rv">贸易板块 · 02 · Trade Division</div>
+    <h2 class="sec-title-en rv">International Trade &amp; Distribution</h2>
+    <div class="sec-title-zh rv d1">国际贸易与全球分销</div>
+    <div class="trade-layout">
+      <div>
+        <div class="trade-cards rv d2">
+          <div class="tc">
+            <span class="tc-icon">🍄</span>
+            <div class="tc-en">Organic &amp; Health</div>
+            <div class="tc-zh">有机健康品</div>
+            <div class="tc-sep"></div>
+            <p class="tc-desc-en">Premium organic mushroom coffee, functional foods and wellness products from certified suppliers.</p>
+            <p class="tc-desc-zh">优质有机灵芝菌菇咖啡、功能性食品及健康产品，来自认证供应商。</p>
+          </div>
+          <div class="tc">
+            <span class="tc-icon">✨</span>
+            <div class="tc-en">Luxury Lifestyle</div>
+            <div class="tc-zh">高端生活方式</div>
+            <div class="tc-sep"></div>
+            <p class="tc-desc-en">Premium consumer goods, home &amp; living and luxury lifestyle products across global markets.</p>
+            <p class="tc-desc-zh">高端消费品、家居生活及奢华生活方式产品，覆盖全球主要市场。</p>
+          </div>
+          <div class="tc">
+            <span class="tc-icon">🏭</span>
+            <div class="tc-en">General Wholesale</div>
+            <div class="tc-zh">综合批发</div>
+            <div class="tc-sep"></div>
+            <p class="tc-desc-en">Wholesale distribution of diversified consumer goods across developed global markets.</p>
+            <p class="tc-desc-zh">多元化消费品综合批发分销，深耕欧美日新等发达市场渠道网络。</p>
+          </div>
+        </div>
+        <div class="stats rv d3">
+          <div class="stat"><div class="stat-n">20+</div><div class="stat-en">Countries</div><div class="stat-zh">覆盖国家</div></div>
+          <div class="stat"><div class="stat-n">B2B</div><div class="stat-en">Focus</div><div class="stat-zh">企业对企业</div></div>
+          <div class="stat"><div class="stat-n">SG</div><div class="stat-en">Headquartered</div><div class="stat-zh">总部新加坡</div></div>
+          <div class="stat"><div class="stat-n">∞</div><div class="stat-en">Ambition</div><div class="stat-zh">全球视野</div></div>
         </div>
       </div>
-      <div class="bc-desc">SOPH（希腊·智慧）+ STAR（星），集团战略投资与资本运作核心，用智慧驾驭混沌中的方向与机遇。</div>
-    </div>
-
-    <div class="bc bo a5">
-      <div class="bc-bg">ORGVIE</div>
-      <div class="bc-top">
-        <div class="bc-icon">☕</div>
-        <div>
-          <div class="bc-name">ORGVIE</div>
-          <span class="bc-tag">有机生命 · 灵芝菌菇咖啡</span>
+      <div class="rv d2">
+        <p class="trade-side-en">We source, distribute and trade premium goods across global supply chains — connecting quality producers with buyers in the world's most developed markets.</p>
+        <p class="trade-side-zh">我们在全球供应链中采购、分销优质商品，将优秀生产商与欧美、日本、新加坡等发达市场的买家紧密相连。</p>
+        <div class="mkt-tags">
+          <div class="mkt-tag">🇸🇬 新加坡</div>
+          <div class="mkt-tag">🇨🇳 中国</div>
+          <div class="mkt-tag">🇺🇸 美国</div>
+          <div class="mkt-tag">🇬🇧 英国</div>
+          <div class="mkt-tag">🇩🇪 德国</div>
+          <div class="mkt-tag">🇯🇵 日本</div>
+          <div class="mkt-tag">🇦🇺 澳大利亚</div>
+          <div class="mkt-tag">🇨🇦 加拿大</div>
+          <div class="mkt-tag">🇫🇷 法国</div>
+          <div class="mkt-tag">🌏 东南亚</div>
         </div>
       </div>
-      <div class="bc-desc">ORG（有机）× VIE（法语·生命），有机灵芝菌菇咖啡品牌，大地孕育的生命精华，法式高端生活美学。</div>
     </div>
+  </div>
+</section>
 
-    <div class="bc bz a6">
-      <div class="bc-bg">ZELOPIA</div>
-      <div class="bc-top">
-        <div class="bc-icon">🌿</div>
-        <div>
-          <div class="bc-name">ZELOPIA</div>
-          <span class="bc-tag">自然乌托邦 · 高端生活方式</span>
-        </div>
+<!-- BRANDS -->
+<section id="brands" class="sec">
+  <div class="sec-inner">
+    <div class="sec-label rv">集团矩阵 · Group Ecosystem</div>
+    <h2 class="sec-title-en rv">The CHAOSOR Family</h2>
+    <div class="sec-title-zh rv d1">四大品牌，一个宇宙</div>
+    <div class="brands-grid">
+      <div class="brand-card bc-chaosor rv d1">
+        <div class="brand-name">CHAOSOR</div>
+        <div class="brand-meaning">Chaos + Or (Gold)</div>
+        <div class="brand-tag-en">Group Holding</div>
+        <div class="brand-tag-zh">集团控股主体</div>
       </div>
-      <div class="bc-desc">ZEAL（热情）× OPIA（境地），混沌中诞生的自然乌托邦，高端有机生活方式的最高想象。</div>
-    </div>
-  </div>
-
-  <div class="arch-chain a7">
-    <div class="ac-main">混沌 → 智慧 → 生命 → 理想</div>
-    <div class="ac-sub">宇宙从混沌到文明的完整进化链条</div>
-  </div>
-</div>
-
-<!-- ════════ S8: SUB BRANDS DEEP ════════ -->
-<div class="slide slide-long" id="s8">
-  <div class="tag a1 w100">子品牌详解 · SUB BRANDS</div>
-  <div class="sec-title a2">THREE BRANDS,<br><em>ONE VISION</em></div>
-
-  <div class="sb ss a3">
-    <div class="grid-tex"></div>
-    <div class="sb-bg">SOPHSTAR</div>
-    <div class="sb-head">
-      <div class="sb-icon">⭐</div>
-      <div>
-        <div class="sb-name">SOPHSTAR</div>
-        <div class="sb-role">智慧之星 · Investment & Strategy</div>
+      <div class="brand-card bc-sophstar rv d2">
+        <div class="brand-name">SOPHSTAR</div>
+        <div class="brand-meaning">Sophia + Star</div>
+        <div class="brand-tag-en">Strategic Investment</div>
+        <div class="brand-tag-zh">战略投资平台</div>
       </div>
-    </div>
-    <div class="sb-hr"></div>
-    <div class="sb-desc">SOPH（希腊语·智慧，Philosophy的词根）+ STAR（星）。用最高智慧驾驭星辰，是 CHAOSOR 集团的战略大脑与资本引擎，在混沌市场中找到黄金机遇。</div>
-    <div class="sb-motto">智慧不是对抗混沌，而是在混沌中找到星光。</div>
-  </div>
-
-  <div class="sb so a4">
-    <div class="grid-tex"></div>
-    <div class="sb-bg">ORGVIE</div>
-    <div class="sb-head">
-      <div class="sb-icon">☕</div>
-      <div>
-        <div class="sb-name">ORGVIE</div>
-        <div class="sb-role">有机生命 · Organic Food Brand</div>
+      <div class="brand-card bc-orgvie rv d3">
+        <div class="brand-name">ORGVIE</div>
+        <div class="brand-meaning">Organic + Vie (Life)</div>
+        <div class="brand-tag-en">Organic Coffee</div>
+        <div class="brand-tag-zh">有机灵芝菌菇咖啡</div>
+      </div>
+      <div class="brand-card bc-zelopia rv d4">
+        <div class="brand-name">ZELOPIA</div>
+        <div class="brand-meaning">Zeal + Opia (Vision)</div>
+        <div class="brand-tag-en">Luxury Lifestyle</div>
+        <div class="brand-tag-zh">高端生活方式</div>
       </div>
     </div>
-    <div class="sb-hr"></div>
-    <div class="sb-desc">ORG（Organic·有机）+ VIE（法语·生命/生活）。有机灵芝菌菇咖啡，让大地最纯粹的馈赠成为每天的仪式感。高端有机食品，法式生活美学。</div>
-    <div class="sb-motto">大地的混沌孕育了最纯粹的有机生命。</div>
   </div>
+</section>
 
-  <div class="sb sz a5">
-    <div class="grid-tex"></div>
-    <div class="sb-bg">ZELOPIA</div>
-    <div class="sb-head">
-      <div class="sb-icon">🌿</div>
-      <div>
-        <div class="sb-name">ZELOPIA</div>
-        <div class="sb-role">自然乌托邦 · Lifestyle Brand</div>
-      </div>
-    </div>
-    <div class="sb-hr"></div>
-    <div class="sb-desc">ZEAL（热情）+ OPIA（境地），充满热情的美好境地，高端有机生活方式的最高想象。不被任何品类绑定，像 Apple 一样自由定义自己。</div>
-    <div class="sb-motto">混沌中诞生的理想，就是 ZELOPIA。</div>
+<!-- MANIFESTO -->
+<section id="manifesto">
+  <svg class="mani-bg" width="480" height="480" viewBox="0 0 200 200" fill="none">
+    <g stroke="#C8A84B" stroke-width="0.4">
+      <line x1="100" y1="10" x2="100" y2="190"/>
+      <line x1="10" y1="100" x2="190" y2="100"/>
+      <line x1="36" y1="36" x2="164" y2="164"/>
+      <line x1="164" y1="36" x2="36" y2="164"/>
+      <circle cx="100" cy="100" r="30" fill="none"/>
+      <circle cx="100" cy="100" r="68" fill="none" opacity=".5"/>
+    </g>
+  </svg>
+  <div class="mani-inner">
+    <div class="mani-label rv">集团宣言 · Manifesto</div>
+    <div class="mani-zh rv d1">混沌不是终点<br>混沌是一切伟大的起点</div>
+    <div class="mani-en rv d2">"Chaos is not the end.<br>Chaos is where all greatness begins."</div>
+    <div class="mani-sig rv d3">CHAOSOR</div>
   </div>
-</div>
+</section>
 
-<!-- ════════ S-ORIGIN: 集团起源 (from v1) ════════ -->
-<div class="slide slide-long" id="s-origin">
-  <div class="orb" style="width:260px;height:260px;background:radial-gradient(circle,rgba(139,94,26,.12),transparent 70%);top:40%;right:-40px"></div>
-
-  <div class="tag a1 w100">集团起源 · ORIGIN</div>
-  <div class="sec-title a2">从<em>混沌</em>中<br>诞生的力量</div>
-
-  <div class="origin-body a3">古希腊哲学家赫西俄德说，宇宙最初只有混沌（Chaos）——无形无边、深邃无底的虚空。从这片混沌中，诞生了大地、天空、海洋，诞生了一切秩序与文明。</div>
-
-  <div class="origin-body a4" style="margin-top:12px">CHAOSOR 的名字正源于此。我们相信，真正的创造力不来自现有的秩序，而来自敢于进入混沌、敢于在不确定中寻找机遇的勇气。</div>
-
-  <div class="origin-quote-box a5">
-    <div class="oqb-text">"In the beginning, there was Chaos. From Chaos, everything was born."</div>
-    <div class="oqb-attr">赫西俄德 · 《神谱》· 约公元前700年</div>
-  </div>
-
-  <!-- mini chaos symbol -->
-  <div style="width:120px;height:120px;margin:20px auto 0;position:relative;" class="a6">
-    <svg style="position:absolute;inset:0;width:100%;height:100%;animation:spinCCW 20s linear infinite" viewBox="0 0 120 120" fill="none">
-      <circle cx="60" cy="60" r="56" stroke="rgba(200,168,75,.12)" stroke-width=".8" stroke-dasharray="4 8"/>
-    </svg>
-    <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 120 120" fill="none">
-      <g stroke="#C8A84B" stroke-width="1" stroke-linecap="round" opacity=".7">
-        <line x1="60" y1="60" x2="60" y2="8"/><line x1="60" y1="8" x2="56" y2="18"/><line x1="60" y1="8" x2="64" y2="18"/>
-        <line x1="60" y1="60" x2="60" y2="112"/><line x1="60" y1="112" x2="56" y2="102"/><line x1="60" y1="112" x2="64" y2="102"/>
-        <line x1="60" y1="60" x2="8"  y2="60"/><line x1="8"  y1="60" x2="18" y2="56"/><line x1="8"  y1="60" x2="18" y2="64"/>
-        <line x1="60" y1="60" x2="112" y2="60"/><line x1="112" y1="60" x2="102" y2="56"/><line x1="112" y1="60" x2="102" y2="64"/>
-        <line x1="60" y1="60" x2="98" y2="22"/><line x1="98" y1="22" x2="91" y2="27"/><line x1="98" y1="22" x2="93" y2="32"/>
-        <line x1="60" y1="60" x2="22" y2="98"/><line x1="22" y1="98" x2="29" y2="93"/><line x1="22" y1="98" x2="27" y2="87"/>
-        <line x1="60" y1="60" x2="22" y2="22"/><line x1="22" y1="22" x2="29" y2="27"/><line x1="22" y1="22" x2="27" y2="37"/>
-        <line x1="60" y1="60" x2="98" y2="98"/><line x1="98" y1="98" x2="91" y2="93"/><line x1="98" y1="98" x2="93" y2="87"/>
-      </g>
-      <circle cx="60" cy="60" r="5" fill="rgba(200,168,75,.7)"/>
-      <circle cx="60" cy="60" r="2.5" fill="#E8C870"/>
-    </svg>
-  </div>
-</div>
-
-<!-- ════════ S-VISION: 集团定位 (from v1) ════════ -->
-<div class="slide slide-long" id="s-vision">
-  <div class="orb" style="width:200px;height:200px;background:radial-gradient(circle,rgba(42,107,107,.1),transparent 70%);top:20%;right:-20px"></div>
-
-  <div class="tag a1 w100">集团定位 · STRATEGIC VISION</div>
-  <div class="sec-title a2">清晰的<em>战略方向</em></div>
-
-  <div class="vgrid">
-    <div class="vc vd a3">
-      <div class="grid-tex"></div>
-      <div class="vc-lbl">集团使命</div>
-      <div class="vc-txt">在混沌与不确定中发现价值，通过战略投资与品牌建设，在全球市场创造可持续的卓越回报。</div>
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="sec-label rv" style="justify-content:center">联系我们 · Contact</div>
+    <p class="contact-en rv">"The gold is found within the chaos.<br>Let us find yours."</p>
+    <p class="contact-zh rv d1">混沌之中，价值所在 — 让我们一起探寻属于你的黄金</p>
+    <div class="contact-btns rv d2">
+      <a href="mailto:hello@chaosor.com" class="btn-solid">发送邮件 · Email Us</a>
+      <a href="#services" class="btn-ghost">了解服务 · Services</a>
     </div>
-    <div class="vc vg a4">
-      <div class="grid-tex"></div>
-      <div class="vc-lbl">集团愿景</div>
-      <div class="vc-txt">成为亚洲最具哲学深度的多元化控股集团，让CHAOSOR成为从混沌中创造价值的代名词。</div>
-    </div>
-    <div class="vc vg a5">
-      <div class="grid-tex"></div>
-      <div class="vc-lbl">核心价值观</div>
-      <div class="vc-txt">拥抱混沌、洞察本质、长期主义、创造价值。在别人恐惧时进入，在别人贪婪时审视。</div>
-    </div>
-    <div class="vc vd a6">
-      <div class="grid-tex"></div>
-      <div class="vc-lbl">品牌承诺</div>
-      <div class="vc-txt">CHAOSOR 旗下每一个品牌，都是从混沌中提炼出来的价值——纯粹、经得起时间考验。</div>
+    <div class="contact-info rv d3">
+      <div class="ci"><div class="ci-dot"></div>新加坡注册公司 · Singapore Registered · Pte. Ltd.</div>
+      <div class="ci"><div class="ci-dot"></div>hello@chaosor.com</div>
+      <div class="ci"><div class="ci-dot"></div>13521710071@163.com</div>
+      <div class="ci"><div class="ci-dot"></div>chaosor.com · 全球服务 · Global Services</div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ════════ S9: COLORS ════════ -->
-<div class="slide" id="s9">
-  <div class="tag a1 w100">品牌色彩 · COLOR SYSTEM</div>
-  <div class="sec-title a2">THE PALETTE OF<br><em>CHAOS & GOLD</em></div>
-  <div class="pal a3">
-    <div class="pc"><div class="pc-sw" style="background:#070707;border-bottom:1px solid #222"></div><div class="pc-info"><div class="pc-name">Void Black</div><div class="pc-hex">#070707</div><div class="pc-role">主背景·混沌之源</div></div></div>
-    <div class="pc"><div class="pc-sw" style="background:#C8A84B"></div><div class="pc-info"><div class="pc-name">Heraldic Gold</div><div class="pc-hex">#C8A84B</div><div class="pc-role">主色·纹章黄金</div></div></div>
-    <div class="pc"><div class="pc-sw" style="background:#E8C870"></div><div class="pc-info"><div class="pc-name">Solar Gold</div><div class="pc-hex">#E8C870</div><div class="pc-role">高光·太阳之金</div></div></div>
-    <div class="pc"><div class="pc-sw" style="background:#C04040"></div><div class="pc-info"><div class="pc-name">Chaos Crimson</div><div class="pc-hex">#C04040</div><div class="pc-role">点缀·混沌之火</div></div></div>
-    <div class="pc"><div class="pc-sw" style="background:#2A6B6B"></div><div class="pc-info"><div class="pc-name">Sophstar Teal</div><div class="pc-hex">#2A6B6B</div><div class="pc-role">SOPHSTAR专色</div></div></div>
-    <div class="pc"><div class="pc-sw" style="background:#3A6A38"></div><div class="pc-info"><div class="pc-name">Orgvie Green</div><div class="pc-hex">#3A6A38</div><div class="pc-role">ORGVIE专色</div></div></div>
+<!-- FOOTER -->
+<footer>
+  <div class="ft-left">
+    <img class="ft-logo" src="data:image/jpeg;base64,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" alt="CHAOSOR">
+    <div class="ft-brand">CHAOSOR</div>
   </div>
-  <div class="pal-note a4">黑暗中的黄金 · 混沌中的秩序<br>每一种颜色都来自宇宙最深处</div>
-</div>
-
-<!-- ════════ S10: MANIFESTO ════════ -->
-<div class="slide" id="s10">
-  <div class="man-ghost">CHAOS</div>
-  <div class="orb" style="width:310px;height:310px;background:radial-gradient(circle,rgba(139,94,26,.16),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)"></div>
-
-  <div class="tag a1" style="justify-content:center">集团宣言 · MANIFESTO</div>
-  <div class="man-main a2">
-    混沌不是终点<br>
-    混沌是<span>一切伟大</span><br>
-    <span>的起点</span>
-  </div>
-  <div class="dv a3"><div class="dvl"></div><div class="dvd"></div><div class="dvl r"></div></div>
-  <div class="man-en a4">
-    Chaos is not the end.<br>
-    Chaos is where all greatness begins.<br>
-    This is CHAOSOR.
-  </div>
-  <div class="man-mark a5">CHAOSOR</div>
-</div>
-
-<!-- ════════ S11: END CARD ════════ -->
-<div class="slide" id="s11">
-  <div class="orb" style="width:330px;height:330px;background:radial-gradient(circle,rgba(139,94,26,.13),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)"></div>
-
-  <div class="end-logo-wrap a1">
-    <div class="end-logo">CHAOSOR</div>
-  </div>
-
-  <div class="dv a2"><div class="dvl"></div><div class="dvd"></div><div class="dvl r"></div></div>
-
-  <div class="end-pills a3">
-    <div class="ep es">SOPHSTAR</div>
-    <div class="ep eo">ORGVIE</div>
-    <div class="ep ez">ZELOPIA</div>
-  </div>
-
-  <div class="dv a4"><div class="dvl"></div><div class="dvd"></div><div class="dvl r"></div></div>
-
-  <div class="end-tag a4">
-    从混沌中来，向价值而去<br>
-    <strong>这就是 CHAOSOR</strong>
-  </div>
-  <div class="end-url a5">chaosor.com</div>
-</div>
-
-</div><!-- /slides -->
+  <div class="ft-copy">© 2025 Chaosor Pte. Ltd. · 新加坡 · All rights reserved.</div>
+</footer>
 
 <script>
-/* ── PARTICLES ── */
-(function(){
-  var c=document.getElementById('pt');
-  for(var i=0;i<58;i++){
-    var p=document.createElement('div');p.className='p';
-    var s=Math.random()*2.4+0.4;
-    var gold=Math.random()>.46;
-    p.style.cssText=
-      'left:'+Math.random()*100+'%;'+
-      'width:'+s+'px;height:'+s+'px;'+
-      'animation-duration:'+(Math.random()*22+13)+'s;'+
-      'animation-delay:'+(Math.random()*22)+'s;'+
-      '--d:'+(Math.random()-.5)*210+'px;'+
-      'background:'+(gold?'#C8A84B':'rgba(192,200,230,.38)')+';'+
-      (gold?'box-shadow:0 0 5px rgba(200,168,75,.45);':'');
-    c.appendChild(p);
-  }
-})();
-
-/* ── SLIDE ENGINE ── */
-(function(){
-  var slides=[].slice.call(document.querySelectorAll('.slide'));
-  var dotsEl=document.getElementById('dots');
-  var ctrEl =document.getElementById('ctr');
-  var pbEl  =document.getElementById('progress');
-  var total =slides.length;
-
-  /* build dots */
-  slides.forEach(function(_,i){
-    var d=document.createElement('div');
-    d.className='dot'+(i===0?' on':'');
-    d.addEventListener('click',function(){
-      slides[i].scrollIntoView({behavior:'smooth'});
-    });
-    dotsEl.appendChild(d);
-  });
-
-  function activate(idx){
-    /* dots */
-    [].forEach.call(document.querySelectorAll('.dot'),function(d,i){
-      d.classList.toggle('on',i===idx);
-    });
-    /* counter */
-    ctrEl.textContent=('0'+(idx+1)).slice(-2)+' / '+('0'+total).slice(-2);
-    /* progress bar */
-    pbEl.style.width=((idx+1)/total*100)+'%';
-    /* add .on to slide to fire animations */
-    slides[idx].classList.add('on');
-  }
-
-  /* IntersectionObserver — fires when slide is >52% visible */
-  var obs=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){
-        activate(slides.indexOf(e.target));
-      }
-    });
-  },{threshold:0.52});
-
-  slides.forEach(function(s){obs.observe(s);});
-  activate(0);
-})();
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); });
+}, {threshold: 0.1});
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>
