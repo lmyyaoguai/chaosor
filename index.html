@@ -31,25 +31,25 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;ali
 .nav-links{display:flex;gap:28px}
 .nav-links a{font-size:12px;font-weight:400;letter-spacing:.04em;color:var(--text-dim);text-decoration:none;transition:color .25s}
 .nav-links a:hover{color:var(--gold);text-shadow:0 0 20px rgba(200,168,75,.4)}
-.nav-cta{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--void);background:var(--gold);padding:10px 20px;text-decoration:none;transition:background .25s;white-space:nowrap}
+.nav-cta{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--void);background:var(--gold);padding:10px 20px;text-decoration:none;transition:background .25s;white-space:nowrap}
 .nav-cta:hover{background:var(--gold2)}
 
 /* HERO */
 #hero{min-height:100vh;padding-top:64px;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
 .hero-left{display:flex;flex-direction:column;justify-content:center;padding:80px 56px;border-right:1px solid var(--border)}
 .hero-right{display:flex;flex-direction:column;justify-content:center;padding:60px 48px;background:radial-gradient(ellipse at 60% 50%,rgba(200,168,75,.06) 0%,transparent 70%)}
-.hero-eyebrow{font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--text-faint);margin-bottom:26px;display:flex;align-items:center;gap:12px}
+.hero-eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-faint);margin-bottom:26px;display:flex;align-items:center;gap:12px}
 .hero-eyebrow::before{content:"";width:24px;height:1px;background:var(--gold-dim)}
 .hero-title{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:clamp(36px,4.5vw,60px);font-weight:700;letter-spacing:.18em;line-height:1;background:linear-gradient(135deg,#a87c20 0%,#E2C56A 45%,#C8A84B 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
 .hero-sub{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:clamp(14px,1.6vw,19px);font-weight:300;font-style:italic;color:rgba(200,168,75,.5);letter-spacing:.06em;margin-bottom:6px}
-.hero-sub-zh{font-size:11px;letter-spacing:.26em;color:var(--text-faint);margin-bottom:40px}
+.hero-sub-zh{font-size:14px;letter-spacing:.1em;color:var(--text-faint);margin-bottom:40px}
 .hero-sep{width:44px;height:1px;background:var(--gold-dim);margin-bottom:32px}
 .hero-desc-en{font-family:'SF Pro Display', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:22px;font-weight:300;line-height:1.85;color:var(--text-dim);margin-bottom:10px}
 .hero-desc-zh{font-size:15px;letter-spacing:.08em;line-height:2.2;color:var(--text-faint);margin-bottom:40px}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
-.btn-solid{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--void);background:var(--gold);padding:12px 28px;text-decoration:none;border:1px solid var(--gold);transition:all .25s}
+.btn-solid{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--void);background:var(--gold);padding:12px 28px;text-decoration:none;border:1px solid var(--gold);transition:all .25s}
 .btn-solid:hover{background:var(--gold2)}
-.btn-ghost{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);background:transparent;padding:12px 28px;text-decoration:none;border:1px solid var(--gold-dim);transition:all .25s}
+.btn-ghost{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);background:transparent;padding:12px 28px;text-decoration:none;border:1px solid var(--gold-dim);transition:all .25s}
 .btn-ghost:hover{border-color:var(--gold)}
 
 /* Hero Right — service preview */
@@ -57,7 +57,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;ali
 .hero-svc{padding:20px 0;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:4px;transition:padding-left .3s}
 .hero-svc:first-child{border-top:1px solid var(--border)}
 .hero-svc:hover{padding-left:10px;border-color:rgba(200,168,75,.3)}
-.hs-num{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:12px;letter-spacing:.28em;color:var(--gold-dim)}
+.hs-num{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:14px;letter-spacing:.28em;color:var(--gold-dim)}
 .hs-en{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:22px;font-weight:500;letter-spacing:.02em;color:var(--gold)}
 .hs-zh{font-size:15px;letter-spacing:.04em;color:var(--text-faint)}
 .hs-sep{width:20px;height:1px;background:var(--gold-dim);margin:4px 0}
@@ -66,10 +66,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;ali
 /* SECTION COMMON */
 .sec{padding:110px 56px}
 .sec-inner{max-width:1080px;margin:0 auto}
-.sec-label{font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.sec-label{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;display:flex;align-items:center;gap:12px}
 .sec-label::before{content:"";width:20px;height:1px;background:var(--gold-dim)}
 .sec-title-en{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:clamp(24px,3.2vw,40px);font-weight:600;letter-spacing:.06em;line-height:1.2;color:var(--text);margin-bottom:6px}
-.sec-title-zh{font-size:12px;letter-spacing:.24em;color:var(--text-faint);margin-bottom:52px}
+.sec-title-zh{font-size:16px;letter-spacing:.1em;color:var(--text-faint);margin-bottom:52px}
 
 /* BRAND STORY */
 #story{background:var(--deep)}
@@ -77,16 +77,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;ali
 .story-card{background:var(--card);border:1px solid var(--border);padding:44px 38px;position:relative;overflow:hidden;transition:all .3s}
 .story-card:hover{background:var(--card2);border-color:var(--gold);box-shadow:0 0 32px rgba(200,168,75,.08)}
 .story-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
-.sc-root{font-size:9px;letter-spacing:.32em;color:var(--gold-dim);margin-bottom:10px}
+.sc-root{font-size:12px;letter-spacing:.12em;color:var(--gold-dim);margin-bottom:10px}
 .sc-word-en{font-family:'SF Pro Display', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:26px;letter-spacing:.02em;color:var(--gold);margin-bottom:8px;font-weight:400}
-.sc-word-zh{font-size:13px;letter-spacing:.22em;color:var(--text-faint);margin-bottom:18px}
+.sc-word-zh{font-size:17px;letter-spacing:.1em;color:var(--text-faint);margin-bottom:18px}
 .sc-sep{width:28px;height:1px;background:var(--gold-dim);margin-bottom:18px}
 .sc-desc-en{font-family:'SF Pro Display', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:20px;font-weight:300;line-height:1.85;color:var(--text-dim);margin-bottom:10px}
 .sc-desc-zh{font-size:15px;letter-spacing:.06em;line-height:2.1;color:var(--text-faint)}
 .story-union{background:var(--card);border:1px solid var(--border);padding:36px;text-align:center}
 .union-formula{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:clamp(14px,1.8vw,20px);letter-spacing:.1em;color:var(--text-dim);margin-bottom:10px}
 .union-formula span{color:var(--gold)}
-.union-zh{font-size:12px;letter-spacing:.2em;color:var(--text-faint)}
+.union-zh{font-size:16px;letter-spacing:.08em;color:var(--text-faint)}
 
 /* PHILOSOPHY */
 .phil-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:52px}
@@ -96,7 +96,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;ali
 .phil-card:hover::after{transform:scaleX(1)}
 .phil-num{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:38px;color:var(--gold-dim);line-height:1;margin-bottom:18px}
 .phil-en{font-family:'SF Pro Display', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:18px;letter-spacing:.01em;color:var(--gold);margin-bottom:8px;font-weight:400}
-.phil-zh{font-size:12px;letter-spacing:.18em;color:var(--text-faint);margin-bottom:16px}
+.phil-zh{font-size:16px;letter-spacing:.08em;color:var(--text-faint);margin-bottom:16px}
 .phil-sep{width:28px;height:1px;background:var(--gold-dim);margin-bottom:16px}
 .phil-body-en{font-family:'SF Pro Display', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:19px;font-weight:300;line-height:1.85;color:var(--text-dim);margin-bottom:8px}
 .phil-body-zh{font-size:14px;letter-spacing:.06em;line-height:2.1;color:var(--text-faint)}
@@ -113,7 +113,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;ali
 .svc-card:hover::before{transform:scaleY(1)}
 .svc-icon{font-size:22px;margin-bottom:14px;display:block}
 .svc-en{font-family:'SF Pro Display', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:18px;letter-spacing:.01em;color:var(--gold);margin-bottom:6px;font-weight:400}
-.svc-zh{font-size:10px;letter-spacing:.18em;color:rgba(200,168,75,.45);margin-bottom:12px}
+.svc-zh{font-size:15px;letter-spacing:.06em;color:rgba(200,168,75,.6);margin-bottom:12px}
 .svc-sep{width:20px;height:1px;background:var(--gold-dim);margin-bottom:12px}
 .svc-desc-en{font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;font-size:15px;font-weight:300;font-weight:300;line-height:1.75;color:var(--text-dim);margin-bottom:6px}
 .svc-desc-zh{font-size:14px;letter-spacing:.05em;line-height:2;color:var(--text-faint)}
@@ -123,8 +123,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;ali
 .proc{padding:28px;border-right:1px solid var(--border)}
 .proc:last-child{border-right:none}
 .proc-n{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:24px;color:var(--gold-dim);margin-bottom:8px}
-.proc-en{font-size:11px;font-weight:400;letter-spacing:.12em;color:var(--text);margin-bottom:3px}
-.proc-zh{font-size:10px;letter-spacing:.14em;color:var(--text-faint)}
+.proc-en{font-size:16px;font-weight:500;letter-spacing:.04em;color:var(--text);margin-bottom:5px}
+.proc-zh{font-size:14px;letter-spacing:.06em;color:var(--text-faint)}
 
 /* TRADE */
 #trade{background:var(--deep)}
@@ -134,21 +134,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;ali
 .tc:hover{background:var(--card2);border-color:var(--gold);box-shadow:0 0 28px rgba(200,168,75,.08)}
 .tc-icon{font-size:24px}
 .tc-en{font-family:'SF Pro Display', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:18px;letter-spacing:.01em;color:var(--gold);font-weight:400}
-.tc-zh{font-size:10px;letter-spacing:.16em;color:rgba(200,168,75,.4)}
+.tc-zh{font-size:15px;letter-spacing:.06em;color:rgba(200,168,75,.6)}
 .tc-sep{width:20px;height:1px;background:var(--gold-dim)}
 .tc-desc-en{font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;font-size:15px;font-weight:300;font-weight:300;line-height:1.75;color:var(--text-dim)}
 .tc-desc-zh{font-size:14px;letter-spacing:.05em;line-height:2;color:var(--text-faint)}
 .trade-side-en{font-family:'SF Pro Display', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:24px;font-weight:300;line-height:1.85;color:var(--text-dim);margin-bottom:10px}
 .trade-side-zh{font-size:15px;letter-spacing:.1em;line-height:2.1;color:var(--text-faint);margin-bottom:28px}
 .mkt-tags{display:flex;flex-wrap:wrap;gap:7px}
-.mkt-tag{font-size:9px;letter-spacing:.12em;color:var(--text-faint);padding:5px 11px;border:1px solid var(--border);transition:all .25s}
+.mkt-tag{font-size:13px;letter-spacing:.04em;color:var(--text-faint);padding:7px 14px;border:1px solid var(--border);transition:all .25s}
 .mkt-tag:hover{color:var(--gold);border-color:var(--gold);background:rgba(200,168,75,.07)}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border);margin-top:44px}
 .stat{padding:28px;text-align:center;border-right:1px solid var(--border)}
 .stat:last-child{border-right:none}
 .stat-n{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:30px;color:var(--gold);margin-bottom:6px}
-.stat-en{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint);margin-bottom:2px}
-.stat-zh{font-size:9px;letter-spacing:.14em;color:var(--text-faint)}
+.stat-en{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-faint);margin-bottom:4px}
+.stat-zh{font-size:13px;letter-spacing:.06em;color:var(--text-faint)}
 
 /* BRANDS */
 #brands{background:var(--void)}
@@ -167,13 +167,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;ali
 .bc-ORGVIE .brand-name{color:#6aaa68}
 .bc-ZELOPIA .brand-name{color:#b8956a}
 .brand-meaning{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:11px;font-style:italic;color:var(--text-faint);margin-bottom:10px}
-.brand-tag-en{font-size:9px;letter-spacing:.14em;color:var(--text-faint);margin-bottom:3px}
-.brand-tag-zh{font-size:9px;letter-spacing:.12em;color:var(--text-faint)}
+.brand-tag-en{font-size:14px;letter-spacing:.04em;color:var(--text-faint);margin-bottom:5px}
+.brand-tag-zh{font-size:14px;letter-spacing:.04em;color:var(--text-faint)}
 
 /* MANIFESTO */
 #manifesto{background:var(--deep);padding:130px 56px;text-align:center;position:relative;overflow:hidden}
 .mani-inner{max-width:700px;margin:0 auto;position:relative;z-index:2}
-.mani-label{font-size:9px;letter-spacing:.5em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:32px}
+.mani-label{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:32px}
 .mani-zh{font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;font-size:clamp(16px,2.8vw,28px);font-weight:100;letter-spacing:.14em;line-height:1.9;color:var(--text-dim);margin-bottom:18px}
 .mani-en{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:clamp(14px,2.2vw,22px);font-style:italic;font-weight:300;line-height:1.8;color:rgba(200,168,75,.45);margin-bottom:44px}
 .mani-sig{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:clamp(28px,4vw,48px);font-weight:700;letter-spacing:.2em;background:linear-gradient(135deg,#a87c20,#E2C56A,#C8A84B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
@@ -183,18 +183,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;ali
 #contact{background:var(--void);padding:110px 56px;border-top:1px solid var(--border)}
 .contact-inner{max-width:720px;margin:0 auto;text-align:center}
 .contact-en{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:clamp(18px,2.6vw,30px);font-style:italic;font-weight:300;color:rgba(200,168,75,.6);margin-bottom:10px;line-height:1.5}
-.contact-zh{font-size:12px;letter-spacing:.22em;color:var(--text-faint);margin-bottom:44px}
+.contact-zh{font-size:16px;letter-spacing:.08em;color:var(--text-faint);margin-bottom:44px}
 .contact-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:44px}
 .contact-info{display:flex;flex-direction:column;gap:12px;align-items:center}
-.ci{font-size:11px;font-weight:300;letter-spacing:.14em;color:var(--text-dim);display:flex;align-items:center;gap:9px}
+.ci{font-size:15px;font-weight:300;letter-spacing:.05em;color:var(--text-dim);display:flex;align-items:center;gap:9px}
 .ci-dot{width:4px;height:4px;border-radius:50%;background:var(--gold-dim);flex-shrink:0}
 
 /* FOOTER */
 footer{background:var(--void);border-top:1px solid var(--border);padding:32px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
 .ft-left{display:flex;align-items:center;gap:10px}
 .ft-logo{height:22px;width:22px;object-fit:contain;opacity:.55}
-.ft-brand{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.2em;color:rgba(200,168,75,.4)}
-.ft-copy{font-size:12px;letter-spacing:.04em;color:var(--text-faint)}
+.ft-brand{font-family:'Cinzel',serif;font-size:14px;letter-spacing:.1em;color:rgba(200,168,75,.4)}
+.ft-copy{font-size:14px;letter-spacing:.03em;color:var(--text-faint)}
 
 /* SCROLL REVEAL */
 
