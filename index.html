@@ -239,6 +239,46 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:32px 48
 .cf-submit:hover{background:var(--gold2)}
 @media(max-width:600px){.cf-row{grid-template-columns:1fr}}
 
+
+/* CUSTOM SELECT */
+.custom-select{position:relative;width:100%}
+.cs-selected{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(200,168,75,.25);
+  color:rgba(237,232,216,.6);
+  padding:18px 22px;
+  font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;
+  font-size:17px;font-weight:400;
+  cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;
+  transition:border-color .25s;
+  user-select:none;
+}
+.cs-selected:hover{border-color:rgba(200,168,75,.5)}
+.cs-selected.active{border-color:var(--gold-dim);color:rgba(237,232,216,.9)}
+.cs-options{
+  display:none;
+  position:absolute;top:100%;left:0;right:0;
+  background:#1c1c0f;
+  border:1px solid rgba(200,168,75,.25);
+  border-top:none;
+  z-index:100;
+  max-height:320px;overflow-y:auto;
+}
+.cs-options.open{display:block}
+.cs-option{
+  padding:16px 22px;
+  font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;
+  font-size:17px;font-weight:400;
+  color:rgba(237,232,216,.75);
+  cursor:pointer;
+  transition:background .15s,color .15s;
+  border-bottom:1px solid rgba(200,168,75,.07);
+}
+.cs-option:last-child{border-bottom:none}
+.cs-option:hover{background:rgba(200,168,75,.1);color:var(--gold)}
+.cs-option.selected{color:var(--gold)}
+
 </style>
 </head>
 <body>
@@ -575,17 +615,25 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:32px 48
       </div>
       <div class="cf-field">
         <label>服务需求 · Service</label>
-        <select name="service">
-          <option value="">请选择 / Please select</option>
-          <option value="immigration">移民服务 · Immigration</option>
-          <option value="study">海外留学 · Study abroad</option>
-          <option value="work">出国务工 · Overseas work</option>
-          <option value="investment">投资咨询 · Investment</option>
-          <option value="consulting">战略咨询 · Strategic consulting</option>
-          <option value="company">公司注册 · Company setup</option>
-          <option value="trade">国际贸易 · International trade</option>
-          <option value="other">其他 · Other</option>
-        </select>
+        <div class="custom-select" id="serviceSelect">
+          <input type="hidden" name="service" id="serviceInput" value="">
+          <div class="cs-selected" onclick="toggleDropdown()">
+            <span id="csDisplay">请选择 / Please select</span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;transition:transform .25s" id="csArrow">
+              <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="cs-options" id="csOptions">
+            <div class="cs-option" onclick="selectOption('immigration','移民服务 · Immigration')">移民服务 · Immigration</div>
+            <div class="cs-option" onclick="selectOption('study','海外留学 · Study abroad')">海外留学 · Study abroad</div>
+            <div class="cs-option" onclick="selectOption('work','出国务工 · Overseas work')">出国务工 · Overseas work</div>
+            <div class="cs-option" onclick="selectOption('investment','投资咨询 · Investment')">投资咨询 · Investment</div>
+            <div class="cs-option" onclick="selectOption('consulting','战略咨询 · Strategic consulting')">战略咨询 · Strategic consulting</div>
+            <div class="cs-option" onclick="selectOption('company','公司注册 · Company setup')">公司注册 · Company setup</div>
+            <div class="cs-option" onclick="selectOption('trade','国际贸易 · International trade')">国际贸易 · International trade</div>
+            <div class="cs-option" onclick="selectOption('other','其他 · Other')">其他 · Other</div>
+          </div>
+        </div>
       </div>
       <div class="cf-field">
         <label>留言 · Message</label>
