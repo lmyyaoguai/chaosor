@@ -11,7 +11,7 @@
   --gold:#C8A84B;--gold2:#E8C870;--amber:#8B5E1A;
   --gold-dim:rgba(200,168,75,.3);--gold-faint:rgba(200,168,75,.07);
   --void:#070707;--deep:#0d0b05;--card:#111009;--card2:#181407;
-  --text:#EDE8D8;--text-dim:rgba(237,232,216,.75);--text-faint:rgba(237,232,216,.38);
+  --text:#EDE8D8;--text-dim:rgba(237,232,216,.85);--text-faint:rgba(237,232,216,.55);
   --border:rgba(200,168,75,.1);--border-h:rgba(200,168,75,.32);
   --teal:#2A6B6B;--green:#3A6A38;
 }
@@ -29,16 +29,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;ali
 .nav-brand{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:14px;font-weight:600;letter-spacing:.22em;color:var(--gold)}
 .nav-brand span{color:var(--text-faint);font-size:10px;font-weight:300;letter-spacing:.1em;margin-left:6px}
 .nav-links{display:flex;gap:28px}
-.nav-links a{font-size:12px;font-weight:400;letter-spacing:.04em;color:var(--text-dim);text-decoration:none;transition:color .25s}
+.nav-links a{font-size:15px;font-weight:400;letter-spacing:.03em;color:var(--text-dim);text-decoration:none;transition:color .25s}
 .nav-links a:hover{color:var(--gold);text-shadow:0 0 20px rgba(200,168,75,.4)}
-.nav-cta{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--void);background:var(--gold);padding:10px 20px;text-decoration:none;transition:background .25s;white-space:nowrap}
+.nav-cta{font-size:14px;letter-spacing:.05em;text-transform:uppercase;color:var(--void);background:var(--gold);padding:10px 20px;text-decoration:none;transition:background .25s;white-space:nowrap}
 .nav-cta:hover{background:var(--gold2)}
 
 /* HERO */
 #hero{min-height:100vh;padding-top:64px;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
 .hero-left{display:flex;flex-direction:column;justify-content:center;padding:80px 56px;border-right:1px solid var(--border)}
 .hero-right{display:flex;flex-direction:column;justify-content:center;padding:60px 48px;background:radial-gradient(ellipse at 60% 50%,rgba(200,168,75,.06) 0%,transparent 70%)}
-.hero-eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-faint);margin-bottom:26px;display:flex;align-items:center;gap:12px}
+.hero-eyebrow{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-faint);margin-bottom:26px;display:flex;align-items:center;gap:12px}
 .hero-eyebrow::before{content:"";width:24px;height:1px;background:var(--gold-dim)}
 .hero-title{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:clamp(36px,4.5vw,60px);font-weight:700;letter-spacing:.18em;line-height:1;background:linear-gradient(135deg,#a87c20 0%,#E2C56A 45%,#C8A84B 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
 .hero-sub{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:clamp(14px,1.6vw,19px);font-weight:300;font-style:italic;color:rgba(200,168,75,.5);letter-spacing:.06em;margin-bottom:6px}
@@ -66,7 +66,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;ali
 /* SECTION COMMON */
 .sec{padding:110px 56px}
 .sec-inner{max-width:1080px;margin:0 auto}
-.sec-label{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.sec-label{font-size:13px;letter-spacing:.12em;color:rgba(200,168,75,.8);text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;display:flex;align-items:center;gap:12px}
 .sec-label::before{content:"";width:20px;height:1px;background:var(--gold-dim)}
 .sec-title-en{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:clamp(24px,3.2vw,40px);font-weight:600;letter-spacing:.06em;line-height:1.2;color:var(--text);margin-bottom:6px}
 .sec-title-zh{font-size:16px;letter-spacing:.1em;color:var(--text-faint);margin-bottom:52px}
@@ -183,7 +183,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;ali
 #contact{background:var(--void);padding:110px 56px;border-top:1px solid var(--border)}
 .contact-inner{max-width:720px;margin:0 auto;text-align:center}
 .contact-en{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', sans-serif;font-size:clamp(18px,2.6vw,30px);font-style:italic;font-weight:300;color:rgba(200,168,75,.6);margin-bottom:10px;line-height:1.5}
-.contact-zh{font-size:16px;letter-spacing:.08em;color:var(--text-faint);margin-bottom:44px}
+.contact-zh{font-size:18px;letter-spacing:.06em;color:rgba(237,232,216,.7);margin-bottom:44px}
 .contact-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:44px}
 .contact-info{display:flex;flex-direction:column;gap:12px;align-items:center}
 .ci{font-size:15px;font-weight:300;letter-spacing:.05em;color:var(--text-dim);display:flex;align-items:center;gap:9px}
@@ -217,22 +217,22 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:32px 48
 .contact-form{width:100%;max-width:620px;margin:0 auto 44px;display:flex;flex-direction:column;gap:16px}
 .cf-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .cf-field{display:flex;flex-direction:column;gap:7px}
-.cf-field label{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-dim)}
+.cf-field label{font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);opacity:.85}
 .cf-field input,.cf-field select,.cf-field textarea{
-  background:var(--card);border:1px solid var(--border);
-  color:var(--text);padding:14px 18px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(200,168,75,.25);
+  color:rgba(237,232,216,.9);padding:18px 22px;font-size:16px;
   font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:300;
   outline:none;transition:border-color .25s;
   -webkit-appearance:none;appearance:none
 }
 .cf-field input:focus,.cf-field select:focus,.cf-field textarea:focus{border-color:var(--gold-dim)}
-.cf-field input::placeholder,.cf-field textarea::placeholder{color:var(--text-faint)}
+.cf-field input::placeholder,.cf-field textarea::placeholder{color:rgba(237,232,216,.5);font-size:16px}
 .cf-field select{cursor:pointer;color:var(--text-dim)}
 .cf-field textarea{resize:vertical;min-height:100px}
 .cf-submit{
-  font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;font-size:10px;letter-spacing:.25em;
+  font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;font-size:14px;letter-spacing:.12em;
   text-transform:uppercase;color:var(--void);background:var(--gold);
-  border:none;padding:14px 32px;cursor:pointer;
+  border:none;padding:16px 40px;cursor:pointer;
   transition:background .25s;align-self:flex-start
 }
 .cf-submit:hover{background:var(--gold2)}
